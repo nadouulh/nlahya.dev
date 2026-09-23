@@ -64,6 +64,18 @@ export default function Home() {
           </a>
         </div>
       </main>
+      <section id="about" className="flex w-full max-w-3xl flex-col gap-4 px-16 py-24">
+        <h2 className="text-2xl font-semibold tracking-tight">About</h2>
+      </section>
+      <section id="experience" className="flex w-full max-w-3xl flex-col gap-4 px-16 py-24">
+        <h2 className="text-2xl font-semibold tracking-tight">Experience</h2>
+      </section>
+      <section id="projects" className="flex w-full max-w-3xl flex-col gap-4 px-16 py-24">
+        <h2 className="text-2xl font-semibold tracking-tight">Projects</h2>
+      </section>
+      <section id="contact" className="flex w-full max-w-3xl flex-col gap-4 px-16 py-24">
+        <h2 className="text-2xl font-semibold tracking-tight">Contact</h2>
+      </section>
     </div>
   );
 }
