@@ -184,7 +184,7 @@ export function WavyBackground() {
     <div
       ref={containerRef}
       aria-hidden
-      className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
     />
   );
 }

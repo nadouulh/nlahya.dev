@@ -39,9 +39,9 @@ function ThemeToggle() {
       aria-label={label}
       title={label}
       onClick={() => setTheme(next)}
-      className="hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent dark:hover:text-primary"
+      className="size-11 hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent dark:hover:text-primary"
     >
-      <Icon className="size-4" />
+      <Icon className="size-6" />
     </Button>
   );
 }
@@ -87,16 +87,16 @@ function LanguageToggle() {
         aria-haspopup="menu"
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
-        className="hover:font-semibold hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent dark:hover:text-primary aria-expanded:bg-transparent aria-expanded:text-muted-foreground"
+        className="h-11 px-4 text-lg text-muted-foreground dark:text-foreground hover:font-semibold hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent dark:hover:text-primary aria-expanded:bg-transparent aria-expanded:text-muted-foreground"
       >
-        <Languages className="size-4" />
+        <Languages className="size-6" />
         {LANGUAGE_LABELS[lang]}
-        <ChevronDown className="size-3.5" />
+        <ChevronDown className="size-5" />
       </Button>
       {open ? (
         <ul
           role="menu"
-          className="hover:font-semibold absolute right-0 top-full z-50 mt-1 min-w-20 overflow-hidden rounded-lg border border-border bg-popover py-1 shadow-lg"
+          className="absolute right-0 top-full z-50 mt-3 min-w-28 overflow-hidden rounded-lg border border-border bg-background/95 py-1 shadow-lg backdrop-blur"
         >
           {LANGUAGES.map((option) => (
             <li key={option} role="menuitem">
@@ -107,15 +107,15 @@ function LanguageToggle() {
                   setOpen(false);
                 }}
                 className={cn(
-                  "flex w-full items-center gap-2 px-3 py-1.5 text-left text-sm transition-colors hover:text-muted-foreground",
+                  "flex w-full items-center gap-2.5 px-5 py-2.5 text-left text-xl transition-colors hover:text-muted-foreground",
                   option === lang
-                    ? "font-semibold text-foreground"
+                    ? "font-semibold text-primary"
                     : "text-muted-foreground"
                 )}
               >
                 <Check
                   className={cn(
-                    "size-3.5",
+                    "size-5",
                     option === lang ? "opacity-100" : "opacity-0"
                   )}
                 />
@@ -133,58 +133,58 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="mx-auto flex h-14 w-full max-w-3xl items-center justify-between px-4">
+    <header className="fixed inset-x-0 top-0 z-50 border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-6">
         <div>
-            <a href="#" className="flex items-center gap-2.5 text-sm font-bold tracking-tight dark:text-primary">
+            <a href="#" className="flex items-center gap-3 text-2xl font-bold tracking-tight dark:text-primary">
             <Image
                 src="/globe.svg"
                 alt="Logo"
-                width={32}
-                height={32}
-                className="h-8 w-8 rounded-full border border-primary object-cover dark:text-primary"
+                width={48}
+                height={48}
+                className="h-12 w-12 rounded-full border border-primary object-cover dark:text-primary"
                 priority
             />
             Nadia Lahya
             </a>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-2">
           <nav className="hidden items-center gap-1 md:flex">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="hover:font-semibold rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground dark:hover:text-foreground dark:text-primary"
+                className="hover:font-semibold rounded-md px-5 py-2.5 text-xl text-muted-foreground transition-colors hover:text-foreground dark:hover:text-foreground dark:text-primary"
               >
                 {link.label}
               </a>
             ))}
           </nav>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             <LanguageToggle />
             <ThemeToggle />
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="size-12 md:hidden"
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               onClick={() => setOpen((value) => !value)}
             >
-              {open ? <X className="size-4" /> : <Menu className="size-4" />}
+              {open ? <X className="size-6" /> : <Menu className="size-6" />}
             </Button>
           </div>
         </div>
       </div>
       {open ? (
         <nav className="border-t md:hidden">
-          <div className="mx-auto flex w-full max-w-3xl flex-col gap-1 px-4 py-3">
+          <div className="mx-auto flex w-full max-w-7xl flex-col gap-1 px-6 py-5">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="rounded-md px-3 py-3.5 text-xl text-muted-foreground transition-colors hover:text-foreground"
               >
                 {link.label}
               </a>
