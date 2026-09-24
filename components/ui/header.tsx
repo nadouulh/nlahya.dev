@@ -30,6 +30,7 @@ function ThemeToggle() {
       aria-label={label}
       title={label}
       onClick={() => setTheme(next)}
+      className="hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent dark:hover:text-primary"
     >
       <Icon className="size-4" />
     </Button>
@@ -45,6 +46,7 @@ function LanguageToggle() {
       size="default"
       aria-label="Toggle language"
       onClick={() => setLang(lang === "en" ? "fr" : "en")}
+      className="hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent dark:hover:text-primary"
     >
       <Languages className="size-4" />
       {lang === "en" ? "EN" : "FR"}
@@ -59,13 +61,13 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto flex h-14 w-full max-w-3xl items-center justify-between px-4">
         <div>
-            <a href="#" className="flex items-center gap-2.5 text-sm font-semibold tracking-tight">
+            <a href="#" className="flex items-center gap-2.5 text-sm font-semibold tracking-tight dark:text-primary">
             <Image
                 src="/globe.svg"
                 alt="Logo"
                 width={32}
                 height={32}
-                className="h-8 w-8 rounded-full border border-primary object-cover dark:invert"
+                className="h-8 w-8 rounded-full border border-primary object-cover dark:text-primary"
                 priority
             />
             Nadia Lahya
@@ -77,7 +79,7 @@ export function Header() {
               <a
                 key={link.href}
                 href={link.href}
-                className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground dark:hover:text-foreground dark:text-primary"
               >
                 {link.label}
               </a>
