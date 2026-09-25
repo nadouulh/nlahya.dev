@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
+import icon from "@/app/icon.png";
 import {
   Check,
   ChevronDown,
@@ -138,11 +139,11 @@ export function Header() {
         <div>
             <a href="#" className="flex items-center gap-3 text-2xl font-bold tracking-tight dark:text-primary">
             <Image
-                src="/globe.svg"
+                src={icon}
                 alt="Logo"
                 width={48}
                 height={48}
-                className="h-12 w-12 rounded-full border border-primary object-cover dark:text-primary"
+                className="h-9 w-9"
                 priority
             />
             Nadia Lahya
