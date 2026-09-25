@@ -1,6 +1,7 @@
 import { ArrowDownToLine, MailPen } from 'lucide-react';
 import { WavyBackground } from "@/components/ui/wavy-background";
 import { SlideDots } from "@/components/ui/slide-dots";
+import { Footer } from "@/components/ui/footer";
 
 export default function Home() {
   return (
@@ -45,9 +46,12 @@ export default function Home() {
         <section id="projects" className="relative flex h-dvh w-full snap-start flex-col items-center justify-center gap-6 px-6 text-center sm:px-20">
           <h2 className="text-4xl font-semibold tracking-tight">Projects</h2>
         </section>
-        <section id="contact" className="relative flex h-dvh w-full snap-start flex-col items-center justify-center gap-6 px-6 text-center sm:px-20">
-          <h2 className="text-4xl font-semibold tracking-tight">Contact</h2>
-        </section>
+        <div className="relative flex h-dvh w-full snap-start flex-col">
+          <section id="contact" className="flex flex-1 flex-col items-center justify-center gap-6 px-6 text-center sm:px-20">
+            <h2 className="text-4xl font-semibold tracking-tight">Contact</h2>
+          </section>
+          <Footer />
+        </div>
       </div>
     </div>
   );
