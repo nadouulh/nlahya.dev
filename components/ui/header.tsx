@@ -87,7 +87,7 @@ function LanguageToggle() {
         aria-haspopup="menu"
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
-        className="h-11 px-4 text-lg text-muted-foreground dark:text-foreground hover:font-semibold hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent dark:hover:text-primary aria-expanded:bg-transparent aria-expanded:text-muted-foreground"
+        className="h-11 px-4 text-lg text-primary dark:text-foreground hover:font-semibold hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent dark:hover:text-primary aria-expanded:bg-transparent aria-expanded:text-muted-foreground"
       >
         <Languages className="size-6" />
         {LANGUAGE_LABELS[lang]}
