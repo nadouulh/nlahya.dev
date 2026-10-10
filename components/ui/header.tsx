@@ -40,9 +40,9 @@ function ThemeToggle() {
       aria-label={label}
       title={label}
       onClick={() => setTheme(next)}
-      className="size-11 hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent dark:hover:text-primary"
+      className="size-9 hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent dark:hover:text-primary"
     >
-      <Icon className="size-6" />
+      <Icon className="size-4" />
     </Button>
   );
 }
@@ -88,16 +88,16 @@ function LanguageToggle() {
         aria-haspopup="menu"
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
-        className="h-11 px-4 text-lg text-primary dark:text-foreground hover:font-semibold hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent dark:hover:text-primary aria-expanded:bg-transparent aria-expanded:text-muted-foreground"
+        className="h-9 px-3 text-sm text-primary dark:text-foreground hover:font-semibold hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent dark:hover:text-primary aria-expanded:bg-transparent aria-expanded:text-muted-foreground"
       >
-        <Languages className="size-6" />
+        <Languages className="size-4" />
         {LANGUAGE_LABELS[lang]}
-        <ChevronDown className="size-5" />
+        <ChevronDown className="size-3.5" />
       </Button>
       {open ? (
         <ul
           role="menu"
-          className="absolute right-0 top-full z-50 mt-3 min-w-28 overflow-hidden rounded-lg border border-border bg-background/95 py-1 shadow-lg backdrop-blur"
+          className="absolute right-0 top-full z-50 mt-2 min-w-24 overflow-hidden rounded-lg border border-border bg-background/95 py-1 shadow-lg backdrop-blur"
         >
           {LANGUAGES.map((option) => (
             <li key={option} role="menuitem">
@@ -108,7 +108,7 @@ function LanguageToggle() {
                   setOpen(false);
                 }}
                 className={cn(
-                  "flex w-full items-center gap-2.5 px-5 py-2.5 text-left text-xl transition-colors hover:text-muted-foreground",
+                  "flex w-full items-center gap-2 px-4 py-2 text-left text-sm transition-colors hover:text-muted-foreground",
                   option === lang
                     ? "font-semibold text-primary"
                     : "text-muted-foreground"
@@ -116,7 +116,7 @@ function LanguageToggle() {
               >
                 <Check
                   className={cn(
-                    "size-5",
+                    "size-3.5",
                     option === lang ? "opacity-100" : "opacity-0"
                   )}
                 />
@@ -135,15 +135,15 @@ export function Header() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-6">
+      <div className="mx-auto flex h-14 w-full max-w-7xl items-center justify-between px-6">
         <div>
-            <a href="#" className="flex items-center gap-3 text-2xl font-bold tracking-tight dark:text-primary">
+            <a href="#" className="flex items-center gap-2 text-lg font-bold tracking-tight dark:text-primary">
             <Image
                 src={icon}
                 alt="Logo"
-                width={48}
-                height={48}
-                className="h-9 w-9"
+                width={36}
+                height={36}
+                className="h-7 w-7"
                 priority
             />
             Nadia Lahya
@@ -155,7 +155,7 @@ export function Header() {
               <a
                 key={link.href}
                 href={link.href}
-                className="hover:font-semibold rounded-md px-5 py-2.5 text-xl text-muted-foreground transition-colors hover:text-foreground dark:hover:text-foreground dark:text-primary"
+                className="hover:font-semibold rounded-md px-4 py-2 text-base text-muted-foreground transition-colors hover:text-foreground dark:hover:text-foreground dark:text-primary"
               >
                 {link.label}
               </a>
@@ -167,12 +167,12 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="size-12 md:hidden"
+              className="size-9 md:hidden"
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               onClick={() => setOpen((value) => !value)}
             >
-              {open ? <X className="size-6" /> : <Menu className="size-6" />}
+              {open ? <X className="size-4" /> : <Menu className="size-4" />}
             </Button>
           </div>
         </div>
@@ -185,7 +185,7 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="rounded-md px-3 py-3.5 text-xl text-muted-foreground transition-colors hover:text-foreground"
+                className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 {link.label}
               </a>
