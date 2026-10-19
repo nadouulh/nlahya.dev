@@ -5,8 +5,10 @@ import { cn } from "cn";
 
 const SECTIONS = [
   { id: "home", label: "Home" },
-  { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
+  { id: "experience", label: "Experience" },
+  { id: "tools", label: "Tools" },
+  { id: "now", label: "Now" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -20,7 +22,8 @@ export function SlideDots() {
           if (entry.isIntersecting) setActive(entry.target.id);
         }
       },
-      { threshold: 0.6 }
+      // Sections can be taller than the viewport: track the one crossing its middle
+      { rootMargin: "-50% 0px -50% 0px" }
     );
     SECTIONS.forEach(({ id }) => {
       const el = document.getElementById(id);
