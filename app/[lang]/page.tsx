@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import { ArrowDownToLine, ArrowUpRight, Lock, MailPen } from "lucide-react";
 import { WavyBackground } from "@/components/ui/wavy-background";
 import { SlideDots } from "@/components/ui/slide-dots";
@@ -6,31 +7,16 @@ import { Footer } from "@/components/ui/footer";
 import { Card, SectionHeading } from "@/components/ui/card";
 import { Tools } from "@/components/ui/tools";
 import { OmniDiagram } from "@/components/ui/omni-diagram";
+import { RichText } from "@/components/rich-text";
+import { getDictionary, hasLocale } from "@/lib/i18n";
 import icon from "@/app/icon.png";
 
 // Set to e.g. "/cv.pdf" (file in public/) to show the download button
 const CV_URL: string | null = "/cv.pdf";
 
-const NOW = {
-  updated: "October 2026",
-  project: "Omni",
-  detail:
-    "We are a team of four on Omni's infrastructure, splitting the work, coordinating and teaching ourselves as we go. Together we are migrating from Dokku to Kubernetes (Talos Linux VMs on a Proxmox cluster, provisioned with OpenTofu), and both staging and production will run this way. We document every step for the whole team and record each architecture choice in an architectural decision record (ADR).",
-};
-
-const AT_A_GLANCE = [
-  { label: "Now", value: "Building Omni on Talos Kubernetes" },
-  { label: "Published", value: "ACM paper & poster, MOCO'26" },
-  { label: "Day job", value: "GCP · OpenTofu · CI/CD" },
-  { label: "Based in", value: "Montpellier, France" },
-];
+const EMAIL = "mailto:nadia.lahya@outlook.com";
 
 const CONTACT_LINKS = [
-  {
-    href: "mailto:nadia.lahya@outlook.com",
-    label: "Email",
-    icon: <MailPen className="size-5" aria-hidden="true" />,
-  },
   {
     href: "https://www.linkedin.com/in/nadia-lahya-0b357a330/",
     label: "LinkedIn",
@@ -60,85 +46,48 @@ const CONTACT_LINKS = [
   },
 ];
 
-const FEATURED = {
-  title: "Omni",
-  tag: "tutored project",
-  description:
-    "Self-hostable collaboration suite (Visio, Vault, Admin, Drive), deployed on Talos Kubernetes over a Proxmox cluster.",
-  stack: ["React", "TypeScript", "Fastify", "PostgreSQL", "OpenTofu", "Kubernetes", "Proxmox"],
-};
+const OMNI_STACK = ["React", "TypeScript", "Fastify", "PostgreSQL", "OpenTofu", "Kubernetes", "Proxmox"];
 
 const PROJECTS = [
   {
+    id: "barenetes",
     title: "Barenetes",
-    tag: "open source",
     href: "https://github.com/do-2k25-28/Barenetes",
-    description: "Minimal reimplementation of the Kubernetes control plane in Rust.",
     stack: ["Rust", "gRPC", "etcd", "mTLS"],
   },
   {
+    id: "doremix",
     title: "DoRémix",
-    tag: "school project",
     href: "https://github.com/nadouulh/doremix",
-    description:
-      "Web app and CLI to create and share community playlists built from YouTube links.",
     stack: ["Python", "FastAPI", "Typer", "PostgreSQL", "Docker"],
   },
-];
+] as const;
+
+const EXPERIENCE = [
+  { id: "railwai", org: "RAILwAI · Montpellier" },
+  {
+    id: "research",
+    org: "IMT Mines Alès (CERIS) & EuroMov · Alès",
+    publication: {
+      // Published title, kept in English in every language
+      title: "Deep Learning for Physical Load Estimation: Insights from the ViLoad Video Dataset",
+      poster: { pdf: "/moco26-poster.pdf", thumbnail: "/moco26-poster.webp" },
+      links: [
+        { key: "paper", href: "https://doi.org/10.1145/3802842.3802900" },
+        { key: "poster", href: "/moco26-poster.pdf" },
+        { key: "dataset", href: "https://www.kaggle.com/datasets/nadialahya/dataset-weight-estimation" },
+        { key: "code", href: "https://github.com/nadouulh/weight-estimation" },
+      ],
+    },
+  },
+] as const;
 
 const inlineLink =
   "font-medium text-link underline underline-offset-2 hover:text-atomic-tangerine-500";
 
-const EXPERIENCE = [
-  {
-    role: "DevOps Engineering Apprentice",
-    org: "RAILwAI · Montpellier",
-    date: "Oct 2025 — Now",
-    summary: (
-      <>
-        I manage our hybrid infrastructure
-        (<strong>GCP</strong>, <strong>Scaleway</strong> and on-premise) as code with{" "}
-        <strong>Terraform/OpenTofu</strong>, build and maintain the <strong>CI pipelines</strong> in
-        Bitbucket, and automate recurring tasks. I also write technical documentation, review my
-        teammates&apos; code and promote <strong>good practices</strong> across the team.
-      </>
-    ),
-  },
-  {
-    role: "AI Research Intern",
-    org: "IMT Mines Alès (CERIS) & EuroMov · Alès",
-    date: "Mar 2025 — Jun 2025",
-    summary: (
-      <>
-        I estimated the load a worker carries from <strong>RGB video</strong> alone to feed REBA
-        ergonomic scoring, helped record the <strong>ViLoad</strong> dataset, and fine-tuned{" "}
-        <a href="https://arxiv.org/abs/1801.04381" target="_blank" rel="noopener noreferrer" className={inlineLink}>
-          MobileNetV2
-        </a>{" "}
-        and{" "}
-        <a href="https://arxiv.org/abs/1711.11248" target="_blank" rel="noopener noreferrer" className={inlineLink}>
-          R3D-18
-        </a>
-        .
-      </>
-    ),
-    publication: {
-      label: "ACM paper & poster · MOCO'26",
-      title: "Deep Learning for Physical Load Estimation: Insights from the ViLoad Video Dataset",
-      poster: { pdf: "/moco26-poster.pdf", thumbnail: "/moco26-poster.webp" },
-      links: [
-        { label: "Paper", href: "https://doi.org/10.1145/3802842.3802900" },
-        { label: "Poster", href: "/moco26-poster.pdf" },
-        { label: "Dataset", href: "https://www.kaggle.com/datasets/nadialahya/dataset-weight-estimation" },
-        { label: "Code", href: "https://github.com/nadouulh/weight-estimation" },
-      ],
-    },
-  },
-];
-
 const chip = "rounded-full bg-chip px-3 py-0.5 text-xs font-medium text-chip-foreground";
 
-function StackList({ stack }: { stack: string[] }) {
+function StackList({ stack }: { stack: readonly string[] }) {
   return (
     <ul className="flex flex-wrap gap-2">
       {stack.map((tech) => (
@@ -150,11 +99,20 @@ function StackList({ stack }: { stack: string[] }) {
   );
 }
 
-export default function Home() {
+export default async function Home({ params }: PageProps<"/[lang]">) {
+  const { lang } = await params;
+  if (!hasLocale(lang)) notFound();
+  const t = getDictionary(lang);
+
+  const contactLinks = [
+    { href: EMAIL, label: t.contact.email, icon: <MailPen className="size-5" aria-hidden="true" /> },
+    ...CONTACT_LINKS,
+  ];
+
   return (
     <div className="relative isolate overflow-x-clip">
       <WavyBackground />
-      <SlideDots />
+      <SlideDots labels={t.nav} />
       <main className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 pb-10 pt-24 sm:gap-14 sm:px-6 sm:pt-28 md:pr-12">
         {/* Hero */}
         <Card id="home" className="grid items-center gap-12 lg:grid-cols-2">
@@ -163,16 +121,12 @@ export default function Home() {
               Nadia Lahya
             </h1>
             <p className="font-display text-[clamp(1.6rem,5vw,2.25rem)] font-bold leading-[1.1] tracking-tight text-subheading">
-              DevOps engineer apprentice
+              {t.hero.role}
             </p>
             <p className="max-w-xl text-pretty text-base leading-[1.75] sm:text-[17px]">
-              I build and automate infrastructure, from CI pipelines to Kubernetes clusters, with
-              a soft spot for AI projects.
+              {t.hero.tagline}
             </p>
-            <p className="max-w-xl text-pretty text-[15px] text-ink-muted">
-              Fourth-year DevOps engineering student at Polytech Montpellier, on a work-study
-              contract at RAILwAI.
-            </p>
+            <p className="max-w-xl text-pretty text-[15px] text-ink-muted">{t.hero.intro}</p>
             <div className="flex flex-col gap-2.5 text-sm font-semibold sm:flex-row">
               {CV_URL ? (
                 <a
@@ -181,7 +135,7 @@ export default function Home() {
                   className="flex h-11 items-center justify-center gap-2 rounded-xl bg-lavender-veil-400 px-4 text-white transition-colors hover:bg-gold-300 hover:text-atomic-tangerine-500 sm:min-w-[170px]"
                 >
                   <ArrowDownToLine className="size-4" />
-                  Curriculum vitae
+                  {t.hero.cv}
                 </a>
               ) : null}
               <a
@@ -189,13 +143,13 @@ export default function Home() {
                 className="flex h-11 items-center justify-center gap-2 rounded-xl border border-hairline px-4 transition-colors hover:border-transparent hover:bg-gold-100 hover:text-atomic-tangerine-500 sm:min-w-[170px]"
               >
                 <MailPen className="size-4" />
-                Get in touch
+                {t.hero.contact}
               </a>
             </div>
           </div>
 
           <aside
-            aria-label="At a glance"
+            aria-label={t.hero.glanceTitle}
             className="relative flex flex-col gap-4 rounded-2xl border border-hairline bg-surface-inner p-6 sm:p-7"
           >
             <Image
@@ -206,9 +160,9 @@ export default function Home() {
               className="absolute -right-2 -top-9 size-20 rotate-[10deg] sm:-right-5 sm:size-24"
             />
             <p className="text-xs font-semibold uppercase tracking-[0.08em] text-ink-muted">
-              At a glance
+              {t.hero.glanceTitle}
             </p>
-            {AT_A_GLANCE.map((row) => (
+            {t.hero.glance.map((row) => (
               <div
                 key={row.label}
                 className="grid grid-cols-[6.5rem_minmax(0,1fr)] gap-3 border-t border-dashed border-hairline pt-3.5 text-sm"
@@ -221,41 +175,38 @@ export default function Home() {
           <p className="flex w-full items-start gap-2.5 rounded-xl bg-gold-300 px-4 py-3 text-[15px] text-[#2a0718] sm:items-center lg:col-span-2">
             <span className="mt-1.5 size-2.5 shrink-0 rounded-full bg-atomic-tangerine-500 sm:mt-0" />
             <span>
-              Open to a <strong>DevOps, Cloud or AI</strong> internship ·
-              Jun–Sep 2027 (min. 9 weeks)
+              <RichText text={t.hero.availability} />
             </span>
           </p>
         </Card>
 
         {/* Projects */}
         <Card id="projects" className="flex flex-col gap-10">
-          <SectionHeading index="01 — Projects" title="Things I've built" className="items-center text-center" />
+          <SectionHeading index={t.projects.index} title={t.projects.title} className="items-center text-center" />
 
           <article className="flex flex-col gap-7 rounded-2xl border border-hairline bg-surface-inner p-4 sm:p-5">
             <div className="flex flex-col gap-4 px-1 py-2 sm:py-3">
               <div className="flex flex-wrap gap-2">
                 <span className="rounded-full bg-gold-300 px-3 py-0.5 text-xs font-semibold text-[#2a0718]">
-                  Now building
+                  {t.projects.nowBuilding}
                 </span>
-                <span className={chip}>{FEATURED.tag}</span>
+                <span className={chip}>{t.projects.omni.tag}</span>
               </div>
-              <h3 className="font-display text-4xl font-extrabold leading-none tracking-tight">
-                {FEATURED.title}
-              </h3>
-              <p className="text-pretty">{FEATURED.description}</p>
-              <StackList stack={FEATURED.stack} />
+              <h3 className="font-display text-4xl font-extrabold leading-none tracking-tight">Omni</h3>
+              <p className="text-pretty">{t.projects.omni.description}</p>
+              <StackList stack={OMNI_STACK} />
               <p className="flex items-center gap-2 text-sm font-medium text-link">
                 <Lock className="size-4 shrink-0" />
-                Private on GitLab · open-source soon
+                {t.projects.private}
               </p>
             </div>
             <figure className="flex flex-col gap-2">
               <div className="overflow-x-auto rounded-xl border border-hairline p-3 sm:p-4">
-                <OmniDiagram />
+                <OmniDiagram labels={t.diagram} />
               </div>
               <figcaption className="text-center text-xs text-ink-muted">
-                Staging and prod Talos clusters on three Proxmox blades, one VXLAN zone each
-                <span className="sm:hidden"> · scroll to see the whole diagram</span>
+                {t.projects.diagramCaption}
+                <span className="sm:hidden">{t.projects.diagramScroll}</span>
               </figcaption>
             </figure>
           </article>
@@ -263,16 +214,16 @@ export default function Home() {
           <div className="grid gap-5 md:grid-cols-2">
             {PROJECTS.map((project) => (
               <article
-                key={project.title}
+                key={project.id}
                 className="flex min-w-0 flex-col gap-3.5 rounded-2xl border border-hairline bg-surface-inner p-6 transition-transform hover:-translate-y-1 sm:p-7"
               >
                 <header className="flex flex-wrap items-center justify-between gap-2">
                   <h3 className="font-display text-[28px] font-extrabold leading-tight tracking-tight">
                     {project.title}
                   </h3>
-                  <span className={chip}>{project.tag}</span>
+                  <span className={chip}>{t.projects[project.id].tag}</span>
                 </header>
-                <p className="text-pretty text-[15px]">{project.description}</p>
+                <p className="text-pretty text-[15px]">{t.projects[project.id].description}</p>
                 <StackList stack={project.stack} />
                 <a
                   href={project.href}
@@ -280,7 +231,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="mt-auto inline-flex min-h-11 w-fit items-center gap-1.5 text-[15px] font-semibold text-link hover:text-atomic-tangerine-500"
                 >
-                  View on GitHub
+                  {t.projects.viewOnGithub}
                   <ArrowUpRight className="size-4" />
                 </a>
               </article>
@@ -290,37 +241,39 @@ export default function Home() {
 
         {/* Experience */}
         <Card id="experience" className="flex flex-col gap-10">
-          <SectionHeading index="02 — Experience" title="Where I've worked" className="items-center text-center" />
+          <SectionHeading index={t.experience.index} title={t.experience.title} className="items-center text-center" />
           <div className="relative flex flex-col gap-7 pl-9 sm:pl-10">
             <div className="absolute bottom-2 left-[13px] top-2 w-px bg-timeline" />
             {EXPERIENCE.map((item) => (
               <article
-                key={item.role}
+                key={item.id}
                 className="relative flex flex-col gap-2 rounded-2xl border border-hairline bg-surface-inner p-5 sm:p-7"
               >
                 <span className="absolute -left-9 top-7 flex size-7 items-center justify-center rounded-full border-2 border-lavender-veil-400 bg-surface-inner sm:-left-10">
                   <span className="size-2.5 rounded-full bg-atomic-tangerine-500" />
                 </span>
                 <header className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-                  <h3 className="font-display text-2xl font-bold leading-tight">{item.role}</h3>
+                  <h3 className="font-display text-2xl font-bold leading-tight">{t.experience[item.id].role}</h3>
                   <span className="rounded-full bg-chip px-3 py-1 text-[13px] font-medium text-chip-foreground">
-                    {item.date}
+                    {t.experience[item.id].date}
                   </span>
                 </header>
                 <p className="font-semibold text-link">{item.org}</p>
-                <p className="text-pretty text-[15px]">{item.summary}</p>
-                {item.publication ? (
+                <p className="text-pretty text-[15px]">
+                  <RichText text={t.experience[item.id].summary} linkClassName={inlineLink} />
+                </p>
+                {"publication" in item ? (
                   <div className="mt-3 flex flex-wrap items-center gap-4 rounded-xl bg-gold-300 px-5 py-4 text-[#2a0718]">
                     <a
                       href={item.publication.poster.pdf}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label="Open the MOCO'26 poster (PDF)"
+                      aria-label={t.experience.publication.posterLabel}
                       className="shrink-0 -rotate-3 overflow-hidden rounded-md shadow-[4px_4px_0_#2a0718] transition-transform hover:rotate-0 hover:scale-105"
                     >
                       <Image
                         src={item.publication.poster.thumbnail}
-                        alt="MOCO'26 poster: Deep learning for physical load estimation, insights from the ViLoad video dataset"
+                        alt={t.experience.publication.posterAlt}
                         width={480}
                         height={679}
                         className="h-auto w-20 sm:w-24"
@@ -328,7 +281,7 @@ export default function Home() {
                     </a>
                     <div className="flex min-w-0 flex-[1_1_16rem] flex-col gap-0.5">
                       <span className="text-xs font-semibold uppercase tracking-[0.06em]">
-                        {item.publication.label}
+                        {t.experience.publication.label}
                       </span>
                       <strong className="font-display text-lg leading-snug sm:text-[19px]">
                         {item.publication.title}
@@ -337,7 +290,7 @@ export default function Home() {
                     <div className="flex flex-wrap gap-2">
                       {item.publication.links.map((link, index) => (
                         <a
-                          key={link.label}
+                          key={link.key}
                           href={link.href}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -347,7 +300,7 @@ export default function Home() {
                               : "flex min-h-11 items-center rounded-[10px] border-[1.5px] border-[#2a0718] px-4 text-sm font-semibold text-[#2a0718] hover:bg-[#2a0718] hover:text-white"
                           }
                         >
-                          {link.label}
+                          {t.experience.publication[link.key]}
                         </a>
                       ))}
                     </div>
@@ -361,31 +314,32 @@ export default function Home() {
         {/* Tools + Now */}
         <div className="grid gap-10 sm:gap-14 lg:grid-cols-2 lg:gap-8">
           <Card id="tools" className="flex flex-col gap-7 lg:p-12">
-            <SectionHeading index="03 — Tools" title="What I work with" />
-            <Tools />
+            <SectionHeading index={t.tools.index} title={t.tools.title} />
+            <Tools titles={t.tools.groups} />
           </Card>
           <Card id="now" className="flex flex-col gap-5 lg:p-12">
-            <SectionHeading index="04 — Now" title="Currently" />
+            <SectionHeading index={t.now.index} title={t.now.title} />
             <p className="font-display text-xl font-medium leading-snug sm:text-2xl">
-              Building <span className="font-bold text-link">{NOW.project}</span>, a self-hostable
-              collaboration suite running on Talos Kubernetes over a Proxmox cluster.
+              <RichText text={t.now.lead} strongClassName="font-bold text-link" />
             </p>
-            <p className="text-[15px] text-ink-muted">{NOW.detail}</p>
+            <p className="text-[15px] text-ink-muted">{t.now.detail}</p>
             <p className="mt-auto flex items-center gap-2 text-[13px] text-ink-muted">
               <span className="size-2 rounded-full bg-atomic-tangerine-500" />
-              Last updated · {NOW.updated}
+              {t.now.updated}
             </p>
           </Card>
         </div>
 
         {/* Contact */}
         <Card id="contact" className="flex flex-col items-center gap-7 text-center lg:p-[4.5rem]">
-          <p className="text-[13px] font-medium text-ink-muted">05 — Contact</p>
+          <p className="text-[13px] font-medium text-ink-muted">{t.contact.index}</p>
           <h2 className="max-w-3xl text-balance font-display text-[clamp(2.5rem,8vw,4.5rem)] font-extrabold leading-none tracking-[-0.035em] text-heading">
-            Let&apos;s build something <span className="text-atomic-tangerine-500">useful</span>.
+            {t.contact.titleStart}
+            <span className="text-atomic-tangerine-500">{t.contact.titleHighlight}</span>
+            {t.contact.titleEnd}
           </h2>
           <div className="flex flex-wrap justify-center gap-2">
-            {CONTACT_LINKS.map((link) => (
+            {contactLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
@@ -400,7 +354,7 @@ export default function Home() {
           </div>
         </Card>
       </main>
-      <Footer />
+      <Footer madeWith={t.footer.madeWith} />
     </div>
   );
 }
