@@ -8,6 +8,18 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-bricolage);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-heading: var(--heading);
+  --color-subheading: var(--subheading);
+  --color-link: var(--link);
+  --color-surface: var(--surface);
+  --color-surface-inner: var(--surface-inner);
+  --color-chip: var(--chip);
+  --color-chip-foreground: var(--chip-foreground);
+  --color-hairline: var(--hairline);
+  --color-timeline: var(--timeline);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -79,6 +91,17 @@
   --sidebar-accent-foreground: #312902;
   --sidebar-border: #fb9dcc;
   --sidebar-ring: #f73b99;
+  --ink: #3a0b24;
+  --ink-muted: #6d2c6d;
+  --heading: #e0006f;
+  --subheading: #c43e00;
+  --link: #c40866;
+  --surface: rgb(254 231 242 / 0.94);
+  --surface-inner: #fff7fb;
+  --chip: #fdcee6;
+  --chip-foreground: #9e0652;
+  --hairline: rgb(0 0 0 / 0.08);
+  --timeline: #f96cb3;
 }
 
 .dark {
@@ -113,6 +136,17 @@
   --sidebar-accent-foreground: #f0dbf0;
   --sidebar-border: rgb(247 59 153 / 0.2);
   --sidebar-ring: #f73b99;
+  --ink: #fdcee6;
+  --ink-muted: #f3b6d4;
+  --heading: #f96cb3;
+  --subheading: #ff9666;
+  --link: #f96cb3;
+  --surface: rgb(34 1 18 / 0.92);
+  --surface-inner: #2e0a1c;
+  --chip: rgb(245 10 128 / 0.15);
+  --chip-foreground: #f96cb3;
+  --hairline: rgb(255 255 255 / 0.145);
+  --timeline: rgb(245 10 128 / 0.4);
 }
 
 @theme {
@@ -243,8 +277,25 @@
   }
   body {
     @apply bg-background text-foreground;
+    -webkit-tap-highlight-color: transparent;
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
+  }
+  :where(a, button, [role="menuitem"]):focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
