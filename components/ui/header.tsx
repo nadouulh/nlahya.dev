@@ -90,7 +90,7 @@ function LanguageToggle() {
         aria-haspopup="menu"
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
-        className="h-9 px-3 text-sm font-medium text-primary dark:text-foreground hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent dark:hover:text-primary aria-expanded:bg-transparent aria-expanded:text-muted-foreground"
+        className="h-9 px-3 text-sm text-primary dark:text-foreground hover:font-semibold hover:bg-transparent hover:text-muted-foreground dark:hover:bg-transparent dark:hover:text-primary aria-expanded:bg-transparent aria-expanded:text-muted-foreground"
       >
         <Languages className="size-4" />
         {LANGUAGE_LABELS[lang]}
@@ -110,7 +110,7 @@ function LanguageToggle() {
                   setOpen(false);
                 }}
                 className={cn(
-                  "flex w-full items-center gap-2 px-3.5 py-2 text-left text-sm transition-colors hover:text-muted-foreground",
+                  "flex w-full items-center gap-2 px-4 py-2 text-left text-sm transition-colors hover:text-muted-foreground",
                   option === lang
                     ? "font-semibold text-primary"
                     : "text-muted-foreground"
@@ -136,10 +136,10 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-hairline bg-surface/75 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-50 border-b bg-background/80 text-foreground backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-6">
         <div>
-            <a href="#home" className="flex items-center gap-2.5 font-display text-xl font-extrabold tracking-tight text-heading">
+            <a href="#home" className="flex items-center gap-2 font-display text-xl font-extrabold tracking-tight text-foreground dark:text-primary">
             <Image
                 src={icon}
                 alt="Logo"
@@ -157,7 +157,7 @@ export function Header() {
               <a
                 key={link.href}
                 href={link.href}
-                className="rounded-md px-3 py-2 text-sm font-medium text-ink-muted transition-colors hover:text-heading"
+                className="hover:font-semibold rounded-md px-4 py-2 text-base text-muted-foreground transition-colors hover:text-foreground dark:hover:text-foreground dark:text-primary"
               >
                 {link.label}
               </a>
@@ -180,14 +180,14 @@ export function Header() {
         </div>
       </div>
       {open ? (
-        <nav className="border-t border-hairline md:hidden">
+        <nav className="border-t md:hidden">
           <div className="mx-auto flex w-full max-w-6xl flex-col gap-1 px-6 py-5">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="rounded-md px-3 py-3 text-base text-ink-muted transition-colors hover:bg-chip hover:text-heading"
+                className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 {link.label}
               </a>
