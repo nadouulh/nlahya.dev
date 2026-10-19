@@ -3,17 +3,10 @@
 import { useEffect, useState } from "react";
 import { cn } from "cn";
 
-const SECTIONS = [
-  { id: "home", label: "Home" },
-  { id: "projects", label: "Projects" },
-  { id: "experience", label: "Experience" },
-  { id: "tools", label: "Tools" },
-  { id: "now", label: "Now" },
-  { id: "contact", label: "Contact" },
-];
+const SECTIONS = ["home", "projects", "experience", "tools", "now", "contact"] as const;
 
-export function SlideDots() {
-  const [active, setActive] = useState(SECTIONS[0].id);
+export function SlideDots({ labels }: { labels: Record<(typeof SECTIONS)[number], string> }) {
+  const [active, setActive] = useState<string>(SECTIONS[0]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -25,7 +18,7 @@ export function SlideDots() {
       // Sections can be taller than the viewport: track the one crossing its middle
       { rootMargin: "-50% 0px -50% 0px" }
     );
-    SECTIONS.forEach(({ id }) => {
+    SECTIONS.forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
@@ -37,12 +30,12 @@ export function SlideDots() {
       aria-label="Sections"
       className="fixed right-4 top-1/2 z-40 hidden -translate-y-1/2 flex-col items-center gap-3 md:flex"
     >
-      {SECTIONS.map(({ id, label }) => (
+      {SECTIONS.map((id) => (
         <a
           key={id}
           href={`#${id}`}
-          aria-label={label}
-          title={label}
+          aria-label={labels[id]}
+          title={labels[id]}
           aria-current={active === id ? "true" : undefined}
           className={cn(
             "rounded-full transition-all duration-300 hover:bg-foreground",

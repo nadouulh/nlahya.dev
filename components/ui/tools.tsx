@@ -316,29 +316,29 @@ const TOOL_ICONS: Record<string, ReactNode> = Object.fromEntries(
   TOOLS.map(({ name, icon }) => [name, icon])
 );
 
-const GROUPS: { title: string; tools: string[]; past?: boolean }[] = [
+const GROUPS: { id: "railwai" | "projects" | "school"; tools: string[]; past?: boolean }[] = [
   {
-    title: "Every day at RAILwAI",
+    id: "railwai",
     tools: ["Google Cloud", "Scaleway", "Terraform", "OpenTofu", "Bitbucket", "Docker", "Kubernetes", "Argo CD"],
   },
   {
-    title: "In my projects",
+    id: "projects",
     tools: ["Linux", "Rust", "Python", "Bash", "Node.js", "React", "shadcn/ui", "Ansible", "Proxmox", "Talos", "GitHub Actions", "GitLab CI"],
   },
   {
-    title: "Earlier, at school",
+    id: "school",
     tools: ["Java", "Spring Boot", "C", "PHP", "Symfony"],
     past: true,
   },
 ];
 
-export function Tools() {
+export function Tools({ titles }: { titles: Record<(typeof GROUPS)[number]["id"], string> }) {
   return (
     <div className="flex flex-col gap-7">
       {GROUPS.map((group) => (
-        <div key={group.title} className="flex flex-col gap-3">
+        <div key={group.id} className="flex flex-col gap-3">
           <h3 className="text-xs font-semibold uppercase tracking-[0.08em] text-subheading">
-            {group.title}
+            {titles[group.id]}
           </h3>
           <ul className="flex flex-wrap gap-2">
             {group.tools.map((name) => (

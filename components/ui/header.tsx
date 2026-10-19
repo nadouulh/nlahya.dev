@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import icon from "@/app/icon.png";
 import {
@@ -16,24 +17,22 @@ import {
 } from "lucide-react";
 import { cn } from "cn";
 import { Button } from "@/components/ui/button";
+import { LOCALES, type Locale } from "@/lib/i18n/config";
+import type { Dictionary } from "@/lib/i18n/dictionaries/en";
 
-const NAV_LINKS = [
-  { href: "#projects", label: "Projects" },
-  { href: "#experience", label: "Experience" },
-  { href: "#tools", label: "Tools" },
-  { href: "#now", label: "Now" },
-  { href: "#contact", label: "Contact" },
-];
+type HeaderLabels = Dictionary["header"];
+
+const NAV_SECTIONS = ["projects", "experience", "tools", "now", "contact"] as const;
 
 const THEMES = ["light", "dark", "system"] as const;
 type Theme = (typeof THEMES)[number];
 
-function ThemeToggle() {
+function ThemeToggle({ labels }: { labels: HeaderLabels }) {
   const { theme, setTheme } = useTheme();
   const current = (THEMES.includes(theme as Theme) ? theme : "system") as Theme;
   const next = THEMES[(THEMES.indexOf(current) + 1) % THEMES.length];
   const Icon = current === "light" ? Sun : current === "dark" ? Moon : Monitor;
-  const label = `Theme: ${current}`;
+  const label = `${labels.theme}: ${labels.themes[current]}`;
 
   return (
     <Button
@@ -49,18 +48,23 @@ function ThemeToggle() {
   );
 }
 
-const LANGUAGES = ["en", "fr", "it"] as const;
-type Language = (typeof LANGUAGES)[number];
-const LANGUAGE_LABELS: Record<Language, string> = {
+const LANGUAGE_LABELS: Record<Locale, string> = {
   en: "EN",
   fr: "FR",
   it: "IT",
 };
 
-function LanguageToggle() {
+function LanguageToggle({ lang, labels }: { lang: Locale; labels: HeaderLabels }) {
   const [open, setOpen] = useState(false);
-  const [lang, setLang] = useState<Language>("en");
+  const router = useRouter();
   const ref = useRef<HTMLDivElement>(null);
+
+  function selectLanguage(option: Locale) {
+    setOpen(false);
+    if (option === lang) return;
+    // proxy.ts remembers the language of the last visited page
+    router.push(`/${option}${window.location.hash}`);
+  }
 
   useEffect(() => {
     if (!open) return;
@@ -85,8 +89,8 @@ function LanguageToggle() {
       <Button
         variant="ghost"
         size="default"
-        aria-label="Select language"
-        title="Select language"
+        aria-label={labels.selectLanguage}
+        title={labels.selectLanguage}
         aria-haspopup="menu"
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
@@ -101,14 +105,12 @@ function LanguageToggle() {
           role="menu"
           className="absolute right-0 top-full z-50 mt-2 min-w-24 overflow-hidden rounded-lg border border-border bg-background/95 py-1 shadow-lg backdrop-blur"
         >
-          {LANGUAGES.map((option) => (
+          {LOCALES.map((option) => (
             <li key={option} role="menuitem">
               <button
                 type="button"
-                onClick={() => {
-                  setLang(option);
-                  setOpen(false);
-                }}
+                lang={option}
+                onClick={() => selectLanguage(option)}
                 className={cn(
                   "flex w-full items-center gap-2 px-4 py-2 text-left text-sm transition-colors hover:text-muted-foreground",
                   option === lang
@@ -132,8 +134,17 @@ function LanguageToggle() {
   );
 }
 
-export function Header() {
+export function Header({
+  lang,
+  nav,
+  labels,
+}: {
+  lang: Locale;
+  nav: Dictionary["nav"];
+  labels: HeaderLabels;
+}) {
   const [open, setOpen] = useState(false);
+  const links = NAV_SECTIONS.map((id) => ({ href: `#${id}`, label: nav[id] }));
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b bg-background/80 text-foreground backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -153,7 +164,7 @@ export function Header() {
         </div>
         <div className="flex items-center gap-2">
           <nav className="hidden items-center gap-1 md:flex">
-            {NAV_LINKS.map((link) => (
+            {links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -164,13 +175,13 @@ export function Header() {
             ))}
           </nav>
           <div className="flex items-center gap-2">
-            <LanguageToggle />
-            <ThemeToggle />
+            <LanguageToggle lang={lang} labels={labels} />
+            <ThemeToggle labels={labels} />
             <Button
               variant="ghost"
               size="icon"
               className="size-9 md:hidden"
-              aria-label={open ? "Close menu" : "Open menu"}
+              aria-label={open ? labels.closeMenu : labels.openMenu}
               aria-expanded={open}
               onClick={() => setOpen((value) => !value)}
             >
@@ -182,7 +193,7 @@ export function Header() {
       {open ? (
         <nav className="border-t md:hidden">
           <div className="mx-auto flex w-full max-w-6xl flex-col gap-1 px-6 py-5">
-            {NAV_LINKS.map((link) => (
+            {links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}

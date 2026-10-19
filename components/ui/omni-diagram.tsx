@@ -1,6 +1,8 @@
 // Simplified view of the Omni infrastructure provisioned by iac-proxmox
 // (full detail lives outside the site, with IPs and VM IDs)
 
+import type { Dictionary } from "@/lib/i18n/dictionaries/en";
+
 const BLADES = [
   { name: "serdaigle-1", x: 30 },
   { name: "serdaigle-2", x: 315 },
@@ -12,7 +14,7 @@ const ENVIRONMENTS = [
   {
     id: "staging",
     y: 202,
-    label: "Staging cluster",
+    label: "stagingCluster" as const,
     band: "fill-atomic-tangerine-500/10 stroke-atomic-tangerine-500",
     box: "stroke-atomic-tangerine-500",
     text: "fill-subheading",
@@ -20,7 +22,7 @@ const ENVIRONMENTS = [
   {
     id: "prod",
     y: 298,
-    label: "Prod cluster",
+    label: "prodCluster" as const,
     band: "fill-lavender-veil-400/10 stroke-lavender-veil-400",
     box: "stroke-lavender-veil-400",
     text: "fill-heading",
@@ -29,14 +31,14 @@ const ENVIRONMENTS = [
 const BAND_HEIGHT = 82;
 
 const ROUTERS = [
-  { env: ENVIRONMENTS[0], title: "Staging router", x: 60, edge: 7 },
-  { env: ENVIRONMENTS[1], title: "Prod router", x: 600, edge: 893 },
+  { env: ENVIRONMENTS[0], title: "stagingRouter" as const, x: 60, edge: 7 },
+  { env: ENVIRONMENTS[1], title: "prodRouter" as const, x: 600, edge: 893 },
 ];
 const ROUTER_WIDTH = 240;
 
 const line = "fill-none stroke-ink/50";
 
-export function OmniDiagram() {
+export function OmniDiagram({ labels }: { labels: Dictionary["diagram"] }) {
   return (
     <svg
       viewBox="0 0 900 480"
@@ -44,12 +46,8 @@ export function OmniDiagram() {
       aria-labelledby="omni-diagram-title omni-diagram-desc"
       className="h-auto w-full min-w-[620px] font-mono"
     >
-      <title id="omni-diagram-title">Omni infrastructure on Proxmox</title>
-      <desc id="omni-diagram-desc">
-        Three Proxmox blades each host a control-plane and a worker VM of both the staging and the
-        prod Talos clusters. Each cluster has its own VXLAN network spanning every blade and its own
-        router to the Internet.
-      </desc>
+      <title id="omni-diagram-title">{labels.title}</title>
+      <desc id="omni-diagram-desc">{labels.description}</desc>
 
       {/* Internet and routers */}
       <rect x="380" y="10" width="140" height="40" rx="10" className="fill-surface-inner stroke-ink/50" />
@@ -78,7 +76,7 @@ export function OmniDiagram() {
               strokeWidth="2"
             />
             <text x={center} y="103" textAnchor="middle" className={`${router.env.text} font-display text-[16px] font-bold`}>
-              {router.title}
+              {labels[router.title]}
             </text>
             <text x={center} y="122" textAnchor="middle" className="fill-ink-muted text-[12px]">
               NAT · WireGuard
@@ -110,10 +108,10 @@ export function OmniDiagram() {
         <g key={env.id}>
           <rect x="15" y={env.y} width="870" height={BAND_HEIGHT} rx="12" className={env.band} strokeWidth="1.5" />
           <text x="30" y={env.y + 22} className={`${env.text} text-[13px] font-semibold`}>
-            {env.label}
+            {labels[env.label]}
           </text>
           {BLADES.map((blade) =>
-            ["control plane", "worker"].map((role, roleIndex) => {
+            [labels.controlPlane, labels.worker].map((role, roleIndex) => {
               const x = blade.x + 15 + roleIndex * 125;
               return (
                 <g key={`${blade.name}-${role}`}>
@@ -150,7 +148,7 @@ export function OmniDiagram() {
         );
       })}
       <text x="450" y="470" textAnchor="middle" className="fill-ink-muted text-[12px]">
-        Both clusters tunnel over the blades&apos; network with VXLAN
+        {labels.underlay}
       </text>
     </svg>
   );
