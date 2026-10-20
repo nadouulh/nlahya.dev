@@ -1,6 +1,16 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowDownToLine, ArrowUpRight, Lock, MailPen } from "lucide-react";
+import {
+  ArrowDownToLine,
+  ArrowUpRight,
+  GraduationCap,
+  ListChecks,
+  Lock,
+  MailPen,
+  MessageSquareText,
+  RefreshCcw,
+  Users,
+} from "lucide-react";
 import { WavyBackground } from "@/components/ui/wavy-background";
 import { SlideDots } from "@/components/ui/slide-dots";
 import { Footer } from "@/components/ui/footer";
@@ -81,6 +91,19 @@ const EXPERIENCE = [
     },
   },
 ] as const;
+
+// Same order as the skills items in the dictionaries
+const SKILL_ICONS = [MessageSquareText, Users, RefreshCcw, GraduationCap, ListChecks];
+
+// Grouped by text length so cards on a row have similar heights:
+// the three short ones first, then the two long ones side by side
+const SKILL_LAYOUT = [
+  { item: 0, className: "lg:col-span-2" }, // Communication
+  { item: 2, className: "lg:col-span-2" }, // Feedback
+  { item: 3, className: "lg:col-span-2" }, // Learning fast
+  { item: 1, className: "lg:col-span-3" }, // Collaboration
+  { item: 4, className: "sm:col-span-2 lg:col-span-3" }, // Rigor
+];
 
 const inlineLink =
   "font-medium text-link underline underline-offset-2 hover:text-atomic-tangerine-500";
@@ -308,6 +331,31 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                 ) : null}
               </article>
             ))}
+          </div>
+        </Card>
+
+        {/* Soft skills, each backed by something concrete */}
+        <Card id="skills" className="flex flex-col gap-10">
+          <SectionHeading index={t.skills.index} title={t.skills.title} className="items-center text-center" />
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
+            {SKILL_LAYOUT.map(({ item, className }) => {
+              const skill = t.skills.items[item];
+              const Icon = SKILL_ICONS[item];
+              return (
+                <article
+                  key={skill.title}
+                  className={`flex flex-col gap-3 rounded-2xl border border-hairline bg-surface-inner p-6 sm:p-7 ${className}`}
+                >
+                  <h3 className="flex items-center gap-3 font-display text-2xl font-bold leading-tight text-heading">
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-chip text-chip-foreground">
+                      <Icon className="size-5" aria-hidden="true" />
+                    </span>
+                    {skill.title}
+                  </h3>
+                  <p className="text-pretty text-[15px]">{skill.proof}</p>
+                </article>
+              );
+            })}
           </div>
         </Card>
 

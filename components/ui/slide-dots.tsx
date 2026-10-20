@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { cn } from "cn";
 
-const SECTIONS = ["home", "projects", "experience", "tools", "now", "contact"] as const;
+const SECTIONS = ["home", "projects", "experience", "skills", "tools", "now", "contact"] as const;
 
 export function SlideDots({ labels }: { labels: Record<(typeof SECTIONS)[number], string> }) {
   const [active, setActive] = useState<string>(SECTIONS[0]);
