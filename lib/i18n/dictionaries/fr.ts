@@ -57,12 +57,12 @@ const fr: Dictionary = {
     },
     barenetes: {
       tag: "open source",
-      description: "Réimplémentation minimale du control plane de Kubernetes en Rust.",
+      description: "Réimplémentation minimale de Kubernetes en Rust, construite en équipe : j'ai travaillé sur l'API, d'autres sur le scheduler, l'agent des nœuds et la CLI.",
     },
     doremix: {
       tag: "projet d'école",
       description:
-        "Application web et CLI pour créer et partager des playlists communautaires à partir de liens YouTube.",
+        "Application web et CLI pour partager des playlists communautaires à partir de liens YouTube : backend FastAPI avec PostgreSQL, CLI en Typer, environnements Docker Compose de dev et de production, tests pytest et limitation de débit sur l'API.",
     },
   },
   diagram: {
@@ -84,7 +84,7 @@ const fr: Dictionary = {
       role: "Apprentie ingénieure DevOps",
       date: "Oct. 2025 — aujourd'hui",
       summary:
-        "Je gère notre infrastructure hybride (**GCP**, **Scaleway** et on-premise) en tant que code avec **Terraform/OpenTofu**, je construis et maintiens les **pipelines CI** sur Bitbucket avec des hooks **pre-commit** et des scans de sécurité **Trivy**, et j'automatise les tâches récurrentes. Je rédige aussi la documentation technique, je relis le code de mes collègues et je promeus les **bonnes pratiques** dans l'équipe.",
+        "Je travaille sur notre infrastructure hybride (**GCP**, **Scaleway** et on-premise) en tant que code avec **Terraform/OpenTofu**, je construis et maintiens les **pipelines CI** sur Bitbucket avec des hooks **pre-commit** et des scans de sécurité **Trivy**, et j'automatise les tâches récurrentes. Je rédige aussi la documentation technique, je relis le code de mes collègues, et j'applique et partage les **bonnes pratiques**.",
     },
     research: {
       role: "Stagiaire en recherche IA",
@@ -111,7 +111,7 @@ const fr: Dictionary = {
       { title: "Collaboration", proof: "Omni se construit à 16 : j'étais développeuse au sprint précédent et je fais maintenant partie de l'équipe ops de quatre. Chez RAILwAI, j'échange avec les devs pour comprendre leurs solutions avant de les déployer, et je tiens mes responsables au courant de mes avancées et de mes blocages." },
       { title: "Feedback", proof: "Sur tous les projets, je n'hésite pas à dire ce qui a bien marché et ce qui a posé problème. Dans les revues de code chez RAILwAI, je fais des retours constructifs et j'apprends de ceux de mes collègues." },
       { title: "Apprentissage rapide", proof: "Je ne connaissais pas grand-chose à l'IA avant mon stage de recherche, qui s'est terminé par un article publié chez ACM. Pour Omni, j'ai appris Talos, Proxmox et le VXLAN sur le tas, et je me suis mise au Rust pour Barenetes." },
-      { title: "Rigueur", proof: "Je tiens à la qualité de tout ce que je produis, pas seulement du code. Côté infrastructure, tout ce que je gère est décrit en code, passe en revue et suit les bonnes pratiques de l'équipe, avec des hooks pre-commit et des scans Trivy qui repèrent les problèmes avant la mise en production." },
+      { title: "Rigueur", proof: "Je tiens à la qualité de tout ce que je produis, pas seulement du code. Côté infrastructure, tout ce sur quoi je travaille est décrit en code, passe en revue et suit les bonnes pratiques de l'équipe, avec des hooks pre-commit et des scans Trivy qui repèrent les problèmes avant la mise en production." },
     ],
   },
   tools: {
@@ -137,9 +137,6 @@ const fr: Dictionary = {
     titleHighlight: "utile",
     titleEnd: ".",
     email: "E-mail",
-  },
-  footer: {
-    madeWith: "Fait avec Next.js et beaucoup de rose",
   },
 };
 

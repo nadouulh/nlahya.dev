@@ -55,11 +55,11 @@ const en = {
     },
     barenetes: {
       tag: "open source",
-      description: "Minimal reimplementation of the Kubernetes control plane in Rust.",
+      description: "Minimal reimplementation of Kubernetes in Rust, built as a team: I worked on the API server, others on the scheduler, the node agent and the CLI.",
     },
     doremix: {
       tag: "school project",
-      description: "Web app and CLI to create and share community playlists built from YouTube links.",
+      description: "Web app and CLI to share community playlists built from YouTube links: FastAPI backend with PostgreSQL, Typer CLI, Docker Compose setups for dev and production, pytest tests and API rate limiting.",
     },
   },
   diagram: {
@@ -81,7 +81,7 @@ const en = {
       role: "DevOps Engineering Apprentice",
       date: "Oct 2025 — Now",
       summary:
-        "I manage our hybrid infrastructure (**GCP**, **Scaleway** and on-premise) as code with **Terraform/OpenTofu**, build and maintain the **CI pipelines** in Bitbucket with **pre-commit** hooks and **Trivy** security scans, and automate recurring tasks. I also write technical documentation, review my teammates' code and promote **good practices** across the team.",
+        "I work on our hybrid infrastructure (**GCP**, **Scaleway** and on-premise) as code with **Terraform/OpenTofu**, build and maintain the **CI pipelines** in Bitbucket with **pre-commit** hooks and **Trivy** security scans, and automate recurring tasks. I also write technical documentation, review my teammates' code, and apply and share **good practices**.",
     },
     research: {
       role: "AI Research Intern",
@@ -108,7 +108,7 @@ const en = {
       { title: "Collaboration", proof: "Omni is built by 16 people: I was a developer last sprint and now work in the 4-person ops team. At RAILwAI, I talk with the developers to understand their solutions before deploying them, and keep my managers updated on my progress and blockers." },
       { title: "Feedback", proof: "On every project, I openly say what worked well and what caused problems. In code reviews at RAILwAI, I give constructive feedback and learn from my teammates'." },
       { title: "Learning fast", proof: "I knew little about AI before my research internship, and it ended with a published ACM paper. For Omni, I learned Talos, Proxmox and VXLAN on the job, and picked up Rust for Barenetes." },
-      { title: "Rigor", proof: "I care about quality in everything I produce, not just code. On the infrastructure side, everything I manage is described as code, goes through review and follows the team's good practices, with pre-commit hooks and Trivy scans catching problems before they ship." },
+      { title: "Rigor", proof: "I care about quality in everything I produce, not just code. On the infrastructure side, everything I work on is described as code, goes through review and follows the team's good practices, with pre-commit hooks and Trivy scans catching problems before they ship." },
     ],
   },
   tools: {
@@ -134,9 +134,6 @@ const en = {
     titleHighlight: "useful",
     titleEnd: ".",
     email: "Email",
-  },
-  footer: {
-    madeWith: "Made with Next.js and a lot of pink",
   },
 };
 

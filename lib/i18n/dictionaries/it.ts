@@ -57,11 +57,11 @@ const it: Dictionary = {
     },
     barenetes: {
       tag: "open source",
-      description: "Reimplementazione minimale del control plane di Kubernetes in Rust.",
+      description: "Reimplementazione minimale di Kubernetes in Rust, realizzata in team: ho lavorato sull'API server, altri sullo scheduler, sull'agente dei nodi e sulla CLI.",
     },
     doremix: {
       tag: "progetto scolastico",
-      description: "Web app e CLI per creare e condividere playlist collettive a partire da link YouTube.",
+      description: "Web app e CLI per condividere playlist collettive a partire da link YouTube: backend FastAPI con PostgreSQL, CLI in Typer, ambienti Docker Compose di sviluppo e produzione, test pytest e rate limiting sull'API.",
     },
   },
   diagram: {
@@ -83,7 +83,7 @@ const it: Dictionary = {
       role: "Apprendista ingegnera DevOps",
       date: "Ott 2025 — oggi",
       summary:
-        "Gestisco la nostra infrastruttura ibrida (**GCP**, **Scaleway** e on-premise) come codice con **Terraform/OpenTofu**, costruisco e mantengo le **pipeline CI** su Bitbucket con hook **pre-commit** e scansioni di sicurezza **Trivy**, e automatizzo le attività ricorrenti. Scrivo anche la documentazione tecnica, revisiono il codice dei colleghi e promuovo le **buone pratiche** nel team.",
+        "Lavoro sulla nostra infrastruttura ibrida (**GCP**, **Scaleway** e on-premise) come codice con **Terraform/OpenTofu**, costruisco e mantengo le **pipeline CI** su Bitbucket con hook **pre-commit** e scansioni di sicurezza **Trivy**, e automatizzo le attività ricorrenti. Scrivo anche la documentazione tecnica, revisiono il codice dei colleghi, e applico e condivido le **buone pratiche**.",
     },
     research: {
       role: "Tirocinante di ricerca in IA",
@@ -110,7 +110,7 @@ const it: Dictionary = {
       { title: "Collaborazione", proof: "Omni è sviluppato da 16 persone: allo sprint precedente ero sviluppatrice, ora faccio parte del team ops di quattro. In RAILwAI mi confronto con gli sviluppatori per capire le loro soluzioni prima di distribuirle, e tengo aggiornati i miei responsabili su progressi e blocchi." },
       { title: "Feedback", proof: "In ogni progetto non esito a dire cosa ha funzionato bene e cosa ha creato problemi. Nelle code review in RAILwAI do feedback costruttivi e imparo da quelli dei colleghi." },
       { title: "Apprendimento rapido", proof: "Prima del tirocinio di ricerca sapevo poco di IA, e si è concluso con un articolo pubblicato da ACM. Per Omni ho imparato Talos, Proxmox e VXLAN sul campo, e mi sono messa al Rust per Barenetes." },
-      { title: "Rigore", proof: "Tengo alla qualità di tutto ciò che produco, non solo del codice. Sul lato infrastruttura, tutto ciò che gestisco è descritto come codice, passa in revisione e segue le buone pratiche del team, con hook pre-commit e scansioni Trivy che individuano i problemi prima del rilascio." },
+      { title: "Rigore", proof: "Tengo alla qualità di tutto ciò che produco, non solo del codice. Sul lato infrastruttura, tutto ciò su cui lavoro è descritto come codice, passa in revisione e segue le buone pratiche del team, con hook pre-commit e scansioni Trivy che individuano i problemi prima del rilascio." },
     ],
   },
   tools: {
@@ -136,9 +136,6 @@ const it: Dictionary = {
     titleHighlight: "utile",
     titleEnd: ".",
     email: "Email",
-  },
-  footer: {
-    madeWith: "Fatto con Next.js e tanto rosa",
   },
 };
 
