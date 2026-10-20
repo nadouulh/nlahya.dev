@@ -402,7 +402,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           </div>
         </Card>
       </main>
-      <Footer madeWith={t.footer.madeWith} />
+      <Footer />
     </div>
   );
 }
