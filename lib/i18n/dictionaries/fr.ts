@@ -10,6 +10,7 @@ const fr: Dictionary = {
     home: "Accueil",
     projects: "Projets",
     experience: "Expérience",
+    skills: "Savoir-être",
     tools: "Outils",
     now: "Actuellement",
     contact: "Contact",
@@ -35,6 +36,8 @@ const fr: Dictionary = {
       { label: "Publication", value: "Article et poster ACM, MOCO'26" },
       { label: "Alternance", value: "GCP · OpenTofu · CI/CD" },
       { label: "Basée à", value: "Montpellier, France" },
+      { label: "Langues", value: "Français · italien · arabe · anglais" },
+      { label: "Loisirs", value: "Karaté, 7 ans en individuel et en équipe · dessin · calligraphie" },
     ],
     availability:
       "Ouverte à un stage en **DevOps, Cloud ou IA** · juin–sept. 2027 (9 semaines min.)",
@@ -81,7 +84,7 @@ const fr: Dictionary = {
       role: "Apprentie ingénieure DevOps",
       date: "Oct. 2025 — aujourd'hui",
       summary:
-        "Je gère notre infrastructure hybride (**GCP**, **Scaleway** et on-premise) en tant que code avec **Terraform/OpenTofu**, je construis et maintiens les **pipelines CI** sur Bitbucket et j'automatise les tâches récurrentes. Je rédige aussi la documentation technique, je relis le code de mes collègues et je promeus les **bonnes pratiques** dans l'équipe.",
+        "Je gère notre infrastructure hybride (**GCP**, **Scaleway** et on-premise) en tant que code avec **Terraform/OpenTofu**, je construis et maintiens les **pipelines CI** sur Bitbucket avec des hooks **pre-commit** et des scans de sécurité **Trivy**, et j'automatise les tâches récurrentes. Je rédige aussi la documentation technique, je relis le code de mes collègues et je promeus les **bonnes pratiques** dans l'équipe.",
     },
     research: {
       role: "Stagiaire en recherche IA",
@@ -100,17 +103,28 @@ const fr: Dictionary = {
       code: "Code",
     },
   },
+  skills: {
+    index: "03 — Savoir-être",
+    title: "Ma façon de travailler",
+    items: [
+      { title: "Communication", proof: "Je rédige la documentation sur laquelle s'appuie mon équipe, je consigne les choix d'architecture dans des ADR et j'ai présenté mes recherches en poster à MOCO'26." },
+      { title: "Collaboration", proof: "Omni se construit à 16 : j'étais développeuse au sprint précédent et je fais maintenant partie de l'équipe ops de quatre. Chez RAILwAI, j'échange avec les devs pour comprendre leurs solutions avant de les déployer, et je tiens mes responsables au courant de mes avancées et de mes blocages." },
+      { title: "Feedback", proof: "Sur tous les projets, je n'hésite pas à dire ce qui a bien marché et ce qui a posé problème. Dans les revues de code chez RAILwAI, je fais des retours constructifs et j'apprends de ceux de mes collègues." },
+      { title: "Apprentissage rapide", proof: "Je ne connaissais pas grand-chose à l'IA avant mon stage de recherche, qui s'est terminé par un article publié chez ACM. Pour Omni, j'ai appris Talos, Proxmox et le VXLAN sur le tas, et je me suis mise au Rust pour Barenetes." },
+      { title: "Rigueur", proof: "Je tiens à la qualité de tout ce que je produis, pas seulement du code. Côté infrastructure, tout ce que je gère est décrit en code, passe en revue et suit les bonnes pratiques de l'équipe, avec des hooks pre-commit et des scans Trivy qui repèrent les problèmes avant la mise en production." },
+    ],
+  },
   tools: {
-    index: "03 — Outils",
+    index: "04 — Outils",
     title: "Avec quoi je travaille",
     groups: {
       railwai: "Au quotidien chez RAILwAI",
       projects: "Dans mes projets",
-      school: "Avant, à l'école",
+      school: "Beaucoup pratiqué, moins récemment",
     },
   },
   now: {
-    index: "04 — Actuellement",
+    index: "05 — Actuellement",
     title: "En ce moment",
     lead: "Je construis **Omni**, une suite collaborative auto-hébergeable qui tourne sur Kubernetes Talos au-dessus d'un cluster Proxmox.",
     detail:
@@ -118,7 +132,7 @@ const fr: Dictionary = {
     updated: "Mis à jour · octobre 2026",
   },
   contact: {
-    index: "05 — Contact",
+    index: "06 — Contact",
     titleStart: "Construisons quelque chose d'",
     titleHighlight: "utile",
     titleEnd: ".",

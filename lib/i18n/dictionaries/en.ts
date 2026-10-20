@@ -8,6 +8,7 @@ const en = {
     home: "Home",
     projects: "Projects",
     experience: "Experience",
+    skills: "How I work",
     tools: "Tools",
     now: "Now",
     contact: "Contact",
@@ -33,6 +34,8 @@ const en = {
       { label: "Published", value: "ACM paper & poster, MOCO'26" },
       { label: "Day job", value: "GCP · OpenTofu · CI/CD" },
       { label: "Based in", value: "Montpellier, France" },
+      { label: "Languages", value: "French · Italian · Arabic · English" },
+      { label: "Outside work", value: "Karate, 7 years in individual and team events · drawing · calligraphy" },
     ],
     availability:
       "Open to a **DevOps, Cloud or AI** internship · Jun–Sep 2027 (min. 9 weeks)",
@@ -78,7 +81,7 @@ const en = {
       role: "DevOps Engineering Apprentice",
       date: "Oct 2025 — Now",
       summary:
-        "I manage our hybrid infrastructure (**GCP**, **Scaleway** and on-premise) as code with **Terraform/OpenTofu**, build and maintain the **CI pipelines** in Bitbucket, and automate recurring tasks. I also write technical documentation, review my teammates' code and promote **good practices** across the team.",
+        "I manage our hybrid infrastructure (**GCP**, **Scaleway** and on-premise) as code with **Terraform/OpenTofu**, build and maintain the **CI pipelines** in Bitbucket with **pre-commit** hooks and **Trivy** security scans, and automate recurring tasks. I also write technical documentation, review my teammates' code and promote **good practices** across the team.",
     },
     research: {
       role: "AI Research Intern",
@@ -97,17 +100,28 @@ const en = {
       code: "Code",
     },
   },
+  skills: {
+    index: "03 — Soft skills",
+    title: "How I work",
+    items: [
+      { title: "Communication", proof: "I write the documentation my teammates rely on, record architecture choices in ADRs, and presented my research as a poster at MOCO'26." },
+      { title: "Collaboration", proof: "Omni is built by 16 people: I was a developer last sprint and now work in the 4-person ops team. At RAILwAI, I talk with the developers to understand their solutions before deploying them, and keep my managers updated on my progress and blockers." },
+      { title: "Feedback", proof: "On every project, I openly say what worked well and what caused problems. In code reviews at RAILwAI, I give constructive feedback and learn from my teammates'." },
+      { title: "Learning fast", proof: "I knew little about AI before my research internship, and it ended with a published ACM paper. For Omni, I learned Talos, Proxmox and VXLAN on the job, and picked up Rust for Barenetes." },
+      { title: "Rigor", proof: "I care about quality in everything I produce, not just code. On the infrastructure side, everything I manage is described as code, goes through review and follows the team's good practices, with pre-commit hooks and Trivy scans catching problems before they ship." },
+    ],
+  },
   tools: {
-    index: "03 — Tools",
+    index: "04 — Tools",
     title: "What I work with",
     groups: {
       railwai: "Every day at RAILwAI",
       projects: "In my projects",
-      school: "Earlier, at school",
+      school: "Used a lot, less recently",
     },
   },
   now: {
-    index: "04 — Now",
+    index: "05 — Now",
     title: "Currently",
     lead: "Building **Omni**, a self-hostable collaboration suite running on Talos Kubernetes over a Proxmox cluster.",
     detail:
@@ -115,7 +129,7 @@ const en = {
     updated: "Last updated · October 2026",
   },
   contact: {
-    index: "05 — Contact",
+    index: "06 — Contact",
     titleStart: "Let's build something ",
     titleHighlight: "useful",
     titleEnd: ".",
