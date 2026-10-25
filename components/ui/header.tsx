@@ -36,7 +36,6 @@ function ThemeToggle({ labels }: { labels: HeaderLabels }) {
 
   return (
     <Button
-      variant="ghost"
       size="icon"
       aria-label={label}
       title={label}
@@ -92,7 +91,6 @@ function LanguageToggle({ lang, labels }: { lang: Locale; labels: HeaderLabels }
   return (
     <div ref={ref} className="relative">
       <Button
-        variant="ghost"
         size="default"
         aria-label={labels.selectLanguage}
         title={labels.selectLanguage}
@@ -183,7 +181,6 @@ export function Header({
             <LanguageToggle lang={lang} labels={labels} />
             <ThemeToggle labels={labels} />
             <Button
-              variant="ghost"
               size="icon"
               className="size-9 md:hidden"
               aria-label={open ? labels.closeMenu : labels.openMenu}
