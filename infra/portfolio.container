@@ -1,0 +1,32 @@
+# Quadlet for app-portfolio: ~/.config/containers/systemd/portfolio.container
+# Static site served by nginx-unprivileged (uid 101, port 3000 inside the container)
+[Unit]
+Description=Portfolio (static, nginx)
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+# Rewritten by deploy.sh on each deployment (signed digest from the CI)
+Image=ghcr.io/OWNER/REPO@sha256:0000000000000000000000000000000000000000000000000000000000000000
+PublishPort=127.0.0.1:3003:3000
+ReadOnly=true
+# nginx-unprivileged keeps its pid and temp files in /tmp
+Tmpfs=/tmp
+NoNewPrivileges=true
+DropCapability=all
+PodmanArgs=--memory=64m --memory-swap=64m
+# Exec form: busybox wget ships with the alpine base
+HealthCmd=["wget", "-q", "-O", "/dev/null", "http://127.0.0.1:3000/api/health"]
+HealthInterval=30s
+HealthRetries=3
+HealthStartPeriod=5s
+HealthOnFailure=kill
+
+[Service]
+Restart=on-failure
+RestartSec=5
+TimeoutStartSec=60
+SuccessExitStatus=143
+
+[Install]
+WantedBy=default.target
