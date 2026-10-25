@@ -5,6 +5,7 @@ import "../globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/ui/header";
 import { LOCALES, getDictionary, hasLocale } from "@/lib/i18n";
+import { SITE_URL } from "@/lib/site";
 
 // Only /en, /fr and /it exist; anything else is a 404
 export const dynamicParams = false;
@@ -18,6 +19,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
   if (!hasLocale(lang)) return {};
   const { meta } = getDictionary(lang);
   return {
+    metadataBase: new URL(SITE_URL),
     title: meta.title,
     description: meta.description,
     alternates: {
