@@ -1,21 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Bricolage_Grotesque, Geist_Mono } from "next/font/google";
+import { bricolage, geistMono } from "@/app/fonts";
 import "../globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/ui/header";
 import { LOCALES, getDictionary, hasLocale } from "@/lib/i18n";
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
-  subsets: ["latin"],
-  axes: ["opsz"],
-});
 
 // Only /en, /fr and /it exist; anything else is a 404
 export const dynamicParams = false;
