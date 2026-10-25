@@ -1,0 +1,109 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+  packages: write
+  actions: read
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      digest: ${{ steps.dg.outputs.value }}
+    steps:
+      - name: Image names (lowercase)
+        id: image
+        run: |
+          repo="ghcr.io/${GITHUB_REPOSITORY,,}"
+          echo "repo=$repo" >> "$GITHUB_OUTPUT"
+          echo "commit=$repo:sha-$GITHUB_SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Login GHCR
+        run: |
+          skopeo login ghcr.io -u "$GITHUB_ACTOR" --password-stdin <<< "$GHCR_TOKEN"
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Wait for build.yml on this commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          run_id=""
+          for _ in $(seq 1 12); do # the build run can take a few seconds to appear
+            run_id=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow build.yml \
+                       --branch main --commit "$GITHUB_SHA" --limit 1 \
+                       --json databaseId --jq '.[0].databaseId // empty')
+            [ -n "$run_id" ] && break
+            sleep 5
+          done
+          if [ -z "$run_id" ]; then
+            echo "::error::build.yml never ran for $GITHUB_SHA. Is the tag on a commit of main?"
+            exit 1
+          fi
+          gh run watch "$run_id" --repo "$GITHUB_REPOSITORY" --exit-status --interval 10
+
+      - name: Get digest
+        id: dg
+        run: echo "value=$(skopeo inspect --format '{{.Digest}}' "docker://${{ steps.image.outputs.commit }}")" >> "$GITHUB_OUTPUT"
+
+      - name: Install cosign
+        uses: sigstore/cosign-installer@dc72c7d5c4d10cd6bcb8cf6e3fd625a9e5e537da # v3.7.0
+
+      # Only images signed by build.yml on main can be released
+      - name: Verify signature
+        run: |
+          cosign login ghcr.io -u "$GITHUB_ACTOR" --password-stdin <<< "$GHCR_TOKEN"
+          cosign verify \
+            --certificate-identity "https://github.com/${GITHUB_REPOSITORY}/.github/workflows/build.yml@refs/heads/main" \
+            --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+            "${{ steps.image.outputs.repo }}@${{ steps.dg.outputs.value }}" > /dev/null
+        env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Registry-to-registry copy that keeps the manifest byte for byte, so the
+      # digest (and its signature) stay the same
+      - name: Tag the release
+        run: |
+          src="docker://${{ steps.image.outputs.repo }}@${{ steps.dg.outputs.value }}"
+          skopeo copy --all --preserve-digests "$src" "docker://${{ steps.image.outputs.repo }}:$GITHUB_REF_NAME"
+          skopeo copy --all --preserve-digests "$src" "docker://${{ steps.image.outputs.repo }}:latest"
+          echo "Released $GITHUB_REF_NAME: ${{ steps.image.outputs.repo }}@${{ steps.dg.outputs.value }}" >> "$GITHUB_STEP_SUMMARY"
+
+  deploy:
+    needs: promote
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Join tailnet
+        uses: tailscale/github-action@306e68a486fd2350f2bfc3b19fcd143891a4a2d8 # v4.1.2
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+
+      # The CI key is restricted to a forced command on the VPS (deploy.sh):
+      # it verifies the signature, pins the digest, health-checks, rolls back
+      - name: Deploy over SSH (tailnet)
+        run: |
+          install -m 600 /dev/stdin key <<< "$VPS_SSH_KEY"
+          echo "$VPS_KNOWN_HOSTS" > known_hosts
+          ssh -i key -T -p "$VPS_SSH_PORT" \
+              -o UserKnownHostsFile=known_hosts \
+              -o StrictHostKeyChecking=yes \
+              app-portfolio-nadia@"$VPS_HOST" \
+              "$DIGEST"
+        env:
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_HOST: ${{ secrets.VPS_HOST }} # = VPS tailnet IP (100.x.y.z)
+          VPS_SSH_PORT: ${{ secrets.VPS_SSH_PORT }} # = 2222
+          VPS_KNOWN_HOSTS: ${{ secrets.VPS_KNOWN_HOSTS }}
+          DIGEST: ${{ needs.promote.outputs.digest }}
