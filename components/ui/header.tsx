@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { cn } from "cn";
 import { Button } from "@/components/ui/button";
-import { LOCALES, type Locale } from "@/lib/i18n/config";
+import { LOCALES, LOCALE_COOKIE, type Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionaries/en";
 
 type HeaderLabels = Dictionary["header"];
@@ -48,6 +48,11 @@ function ThemeToggle({ labels }: { labels: HeaderLabels }) {
   );
 }
 
+// Read by nginx on the next visit to "/" (static export: no server sees /fr)
+function rememberLocale(locale: Locale) {
+  document.cookie = `${LOCALE_COOKIE}=${locale}; path=/; max-age=${60 * 60 * 24 * 365}; samesite=lax`;
+}
+
 const LANGUAGE_LABELS: Record<Locale, string> = {
   en: "EN",
   fr: "FR",
@@ -62,7 +67,7 @@ function LanguageToggle({ lang, labels }: { lang: Locale; labels: HeaderLabels }
   function selectLanguage(option: Locale) {
     setOpen(false);
     if (option === lang) return;
-    // proxy.ts remembers the language of the last visited page
+    rememberLocale(option);
     router.push(`/${option}${window.location.hash}`);
   }
 
