@@ -1,26 +1,28 @@
 # Stage 1: deps
-FROM node:22.23-alpine3.24 AS deps
+FROM docker.io/library/node:22.23-alpine3.24 AS deps
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 RUN corepack enable pnpm && pnpm install --frozen-lockfile
 
-# Stage 2: build in standalone mode
-FROM node:22.23-alpine3.24 AS builder
+# Stage 2: lint, then static export (out/); next build also type-checks
+FROM docker.io/library/node:22.23-alpine3.24 AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN corepack enable pnpm && pnpm build
+RUN corepack enable pnpm && pnpm lint && pnpm build
 
-# Stage 3: run standalone server
-FROM node:22.23-alpine3.24 AS runner
-RUN apk add --no-cache libc6-compat
-WORKDIR /app
-ENV NODE_ENV=production PORT=3000 HOSTNAME=0.0.0.0
-COPY --from=builder /app/public ./public
-RUN mkdir .next && chown node:node .next
-COPY --from=builder --chown=node:node /app/.next/standalone ./
-COPY --from=builder --chown=node:node /app/.next/static ./.next/static
-USER node
+# Stage 3: serve the static files
+# Fully qualified image names: Podman does not assume Docker Hub.
+# nginx-unprivileged runs as uid 101 and keeps its runtime files in /tmp, so the
+# VPS Quadlet can mount the rootfs read-only. stable-alpine + `pull: true` in CI
+# picks up base image security fixes on every build.
+FROM docker.io/nginxinc/nginx-unprivileged:stable-alpine AS runner
+# Apply Alpine security fixes released after the base image was built
+USER root
+RUN apk upgrade --no-cache
+USER 101
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY nginx/security-headers.conf /etc/nginx/security-headers.conf
+COPY --from=builder /app/out /usr/share/nginx/html
 EXPOSE 3000
-CMD ["node", "server.js"]

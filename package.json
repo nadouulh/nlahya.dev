@@ -6,7 +6,8 @@
     "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "preview": "docker build -t portfolio:preview . && docker run --rm --read-only --tmpfs /tmp --cap-drop all -p 127.0.0.1:8080:3000 portfolio:preview"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
