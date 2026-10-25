@@ -128,6 +128,11 @@ const en = {
       "We are a team of four on Omni's infrastructure, splitting the work, coordinating and teaching ourselves as we go. Together we are migrating from Dokku to Kubernetes (Talos Linux VMs on a Proxmox cluster, provisioned with OpenTofu), and both staging and production will run this way. We document every step for the whole team and record each architecture choice in an architectural decision record (ADR).",
     updated: "Last updated · October 2026",
   },
+  notFound: {
+    title: "Page not found",
+    message: "This page doesn't exist or has moved.",
+    back: "Back home",
+  },
   contact: {
     index: "06 — Contact",
     titleStart: "Let's build something ",

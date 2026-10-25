@@ -130,6 +130,11 @@ const it: Dictionary = {
       "Siamo un team di quattro persone sull'infrastruttura di Omni: ci dividiamo il lavoro, ci coordiniamo e ci formiamo strada facendo. Insieme stiamo migrando da Dokku a Kubernetes (VM Talos Linux su un cluster Proxmox, provisionate con OpenTofu), e sia lo staging sia la produzione funzioneranno così. Documentiamo ogni passaggio per tutto il team e registriamo ogni scelta architetturale in un architectural decision record (ADR).",
     updated: "Aggiornato · ottobre 2026",
   },
+  notFound: {
+    title: "Pagina non trovata",
+    message: "Questa pagina non esiste o è stata spostata.",
+    back: "Torna alla home",
+  },
   contact: {
     index: "06 — Contatti",
     titleStart: "Costruiamo qualcosa di ",

@@ -131,6 +131,11 @@ const fr: Dictionary = {
       "Nous sommes une équipe de quatre sur l'infrastructure d'Omni : on se répartit le travail, on se coordonne et on se forme au fur et à mesure. Ensemble, nous migrons de Dokku vers Kubernetes (VMs Talos Linux sur un cluster Proxmox, provisionnées avec OpenTofu), et le staging comme la production fonctionneront ainsi. Nous documentons chaque étape pour toute l'équipe et consignons chaque choix d'architecture dans un architectural decision record (ADR).",
     updated: "Mis à jour · octobre 2026",
   },
+  notFound: {
+    title: "Page introuvable",
+    message: "Cette page n'existe pas ou a été déplacée.",
+    back: "Retour à l'accueil",
+  },
   contact: {
     index: "06 — Contact",
     titleStart: "Construisons quelque chose d'",
