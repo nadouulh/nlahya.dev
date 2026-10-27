@@ -1,5 +1,3 @@
-import Image from "next/image";
-import { notFound } from "next/navigation";
 import {
   ArrowDownToLine,
   ArrowUpRight,
@@ -11,15 +9,12 @@ import {
   RefreshCcw,
   Users,
 } from "lucide-react";
-import { WavyBackground } from "@/components/ui/wavy-background";
-import { SlideDots } from "@/components/ui/slide-dots";
 import { Footer } from "@/components/ui/footer";
 import { Card, SectionHeading } from "@/components/ui/card";
 import { Tools } from "@/components/ui/tools";
 import { OmniDiagram } from "@/components/ui/omni-diagram";
 import { RichText } from "@/components/rich-text";
-import { getDictionary, hasLocale } from "@/lib/i18n";
-import icon from "@/app/icon.png";
+import { getDictionary, type Locale } from "@/lib/i18n";
 
 // Set to e.g. "/cv.pdf" (file in public/) to show the download button
 const CV_URL: string | null = "/cv.pdf";
@@ -122,9 +117,9 @@ function StackList({ stack }: { stack: readonly string[] }) {
   );
 }
 
-export default async function Home({ params }: PageProps<"/[lang]">) {
-  const { lang } = await params;
-  if (!hasLocale(lang)) notFound();
+// Rendered to static HTML by [lang]/index.astro, which adds the interactive
+// islands (animated background, slide dots) around it
+export function HomePage({ lang }: { lang: Locale }) {
   const t = getDictionary(lang);
 
   const contactLinks = [
@@ -133,9 +128,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   ];
 
   return (
-    <div className="relative isolate overflow-x-clip">
-      <WavyBackground />
-      <SlideDots labels={t.nav} />
+    <>
       <main className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 pb-10 pt-24 sm:gap-14 sm:px-6 sm:pt-28 md:pr-12">
         {/* Hero */}
         <Card id="home" className="grid items-center gap-12 lg:grid-cols-2">
@@ -175,11 +168,13 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             aria-label={t.hero.glanceTitle}
             className="relative flex flex-col gap-4 rounded-2xl border border-hairline bg-surface-inner p-6 sm:p-7"
           >
-            <Image
-              src={icon}
+            <img
+              src="/icon.png"
               alt=""
               width={96}
               height={96}
+              loading="lazy"
+              decoding="async"
               className="absolute -right-2 -top-9 size-20 rotate-[10deg] sm:-right-5 sm:size-24"
             />
             <p className="text-xs font-semibold uppercase tracking-[0.08em] text-ink-muted">
@@ -294,11 +289,13 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                       aria-label={t.experience.publication.posterLabel}
                       className="shrink-0 -rotate-3 overflow-hidden rounded-md shadow-[4px_4px_0_#2a0718] transition-transform hover:rotate-0 hover:scale-105"
                     >
-                      <Image
+                      <img
                         src={item.publication.poster.thumbnail}
                         alt={t.experience.publication.posterAlt}
                         width={480}
                         height={679}
+                        loading="lazy"
+                        decoding="async"
                         className="h-auto w-20 sm:w-24"
                       />
                     </a>
@@ -403,6 +400,6 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         </Card>
       </main>
       <Footer />
-    </div>
+    </>
   );
 }

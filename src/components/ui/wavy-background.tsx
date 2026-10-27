@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useTheme } from "next-themes";
+import { useResolvedTheme } from "@/lib/theme";
 import * as THREE from "three";
 
 const PALETTES = {
@@ -23,7 +23,7 @@ const PALETTES = {
 
 export function WavyBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { resolvedTheme } = useTheme();
+  const resolvedTheme = useResolvedTheme();
 
   useEffect(() => {
     const container = containerRef.current;

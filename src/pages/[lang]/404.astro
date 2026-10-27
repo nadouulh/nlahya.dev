@@ -1,0 +1,22 @@
+---
+// Built as /en/404, /fr/404 and /it/404; nginx serves the one matching the
+// visitor's language (URL prefix, then cookie, then browser) for unknown URLs
+import Layout from "@/layouts/Layout.astro";
+import { NotFoundContent } from "@/components/not-found-content";
+import { WavyBackground } from "@/components/ui/wavy-background";
+import { LOCALES, getDictionary, type Locale } from "@/lib/i18n";
+
+export function getStaticPaths() {
+  return LOCALES.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Locale;
+const text = getDictionary(lang).notFound;
+---
+
+<Layout lang={lang} title={`404 · ${text.title}`} noindex>
+  <div class="relative isolate overflow-x-clip">
+    <WavyBackground client:load />
+    <NotFoundContent lang={lang} text={text} />
+  </div>
+</Layout>

@@ -2,7 +2,7 @@
 
 Personal portfolio of Nadia Lahya, in English, French and Italian: [nlahya.dev](https://nlahya.dev).
 
-Built with Next.js as a static export and served by nginx.
+Built with Astro (React components rendered to static HTML, with a few interactive islands) and served by nginx.
 
 ## Development
 
@@ -15,12 +15,13 @@ pnpm dev        # http://localhost:3001/en
 
 ```bash
 pnpm lint
+pnpm build      # astro check, then static build in dist/
 pnpm preview    # production image (nginx) on http://localhost:8080
 ```
 
 ## Content
 
-Texts live in `lib/i18n/dictionaries/` (`en.ts`, `fr.ts`, `it.ts`). TypeScript reports any key missing from a translation.
+Texts live in `src/lib/i18n/dictionaries/` (`en.ts`, `fr.ts`, `it.ts`). TypeScript reports any key missing from a translation.
 
 ## Deployment
 

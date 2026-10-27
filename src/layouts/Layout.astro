@@ -1,0 +1,51 @@
+---
+import { Font } from "astro:assets";
+import "@/styles/globals.css";
+import { Header } from "@/components/ui/header";
+import { LOCALES, getDictionary, type Locale } from "@/lib/i18n";
+import { SITE_URL } from "@/lib/site";
+
+interface Props {
+  lang: Locale;
+  title: string;
+  noindex?: boolean;
+}
+
+const { lang, title, noindex = false } = Astro.props;
+const dict = getDictionary(lang);
+---
+
+<!doctype html>
+<html lang={lang} class="h-full scroll-smooth antialiased">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={dict.meta.description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    {LOCALES.map((locale) => <link rel="alternate" hreflang={locale} href={`${SITE_URL}/${locale}`} />)}
+    <link rel="icon" href="/icon.png" sizes="500x500" type="image/png" />
+    <Font cssVariable="--font-geist-mono" preload />
+    <Font cssVariable="--font-bricolage" preload />
+    <!-- Saved theme (src/lib/theme.ts) applied before the first paint, no flash -->
+    <script is:inline>
+      (() => {
+        let theme;
+        try {
+          theme = localStorage.getItem("theme");
+        } catch {
+          // storage blocked: fall back to the OS setting
+        }
+        if (theme !== "light" && theme !== "dark") theme = "system";
+        const resolved =
+          theme === "system" ? (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : theme;
+        document.documentElement.classList.add(resolved);
+        document.documentElement.style.colorScheme = resolved;
+      })();
+    </script>
+  </head>
+  <body class="min-h-full flex flex-col font-mono text-ink">
+    <Header client:load lang={lang} nav={dict.nav} labels={dict.header} />
+    <slot />
+  </body>
+</html>
