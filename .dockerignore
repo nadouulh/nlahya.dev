@@ -1,5 +1,5 @@
 node_modules/
-.next/
+.astro/
 .pnpm-store/
 
 .git
@@ -11,4 +11,4 @@ Dockerfile*
 
 .env*
 
-out/
+dist/
