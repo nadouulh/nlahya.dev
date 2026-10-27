@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import Image from "next/image";
 import { Cloud, Server, ShieldCheck } from "lucide-react";
 
 type Tool = {
@@ -148,7 +147,7 @@ const TOOLS: Tool[] = [
   {
     name: "Argo CD",
     // Masks and filters in the official logo don't survive JSX conversion well
-    icon: <Image src="/icons/argocd.svg" alt="" width={16} height={16} className={ICON} />,
+    icon: <img src="/icons/argocd.svg" alt="" width={16} height={16} loading="lazy" decoding="async" className={ICON} />,
   },
   {
     name: "pre-commit",
