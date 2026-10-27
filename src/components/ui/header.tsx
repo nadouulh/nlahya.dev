@@ -1,10 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useTheme } from "next-themes";
-import icon from "@/app/icon.png";
 import {
   Check,
   ChevronDown,
@@ -17,6 +13,7 @@ import {
 } from "lucide-react";
 import { cn } from "cn";
 import { Button } from "@/components/ui/button";
+import { THEMES, applyTheme, getTheme, setTheme, useTheme } from "@/lib/theme";
 import { LOCALES, LOCALE_COOKIE, type Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionaries/en";
 
@@ -24,12 +21,8 @@ type HeaderLabels = Dictionary["header"];
 
 const NAV_SECTIONS = ["projects", "experience", "tools", "now", "contact"] as const;
 
-const THEMES = ["light", "dark", "system"] as const;
-type Theme = (typeof THEMES)[number];
-
 function ThemeToggle({ labels }: { labels: HeaderLabels }) {
-  const { theme, setTheme } = useTheme();
-  const current = (THEMES.includes(theme as Theme) ? theme : "system") as Theme;
+  const current = useTheme();
   const next = THEMES[(THEMES.indexOf(current) + 1) % THEMES.length];
   const Icon = current === "light" ? Sun : current === "dark" ? Moon : Monitor;
   const label = `${labels.theme}: ${labels.themes[current]}`;
@@ -47,6 +40,18 @@ function ThemeToggle({ labels }: { labels: HeaderLabels }) {
   );
 }
 
+// Follows the OS setting while the visitor's choice is "system"
+function useSystemThemeSync() {
+  useEffect(() => {
+    const query = matchMedia("(prefers-color-scheme: dark)");
+    const onChange = () => {
+      if (getTheme() === "system") applyTheme("system");
+    };
+    query.addEventListener("change", onChange);
+    return () => query.removeEventListener("change", onChange);
+  }, []);
+}
+
 // Read by nginx on the next visit to "/" (static export: no server sees /fr)
 function rememberLocale(locale: Locale) {
   document.cookie = `${LOCALE_COOKIE}=${locale}; path=/; max-age=${60 * 60 * 24 * 365}; samesite=lax`;
@@ -60,14 +65,13 @@ const LANGUAGE_LABELS: Record<Locale, string> = {
 
 function LanguageToggle({ lang, labels }: { lang: Locale; labels: HeaderLabels }) {
   const [open, setOpen] = useState(false);
-  const router = useRouter();
   const ref = useRef<HTMLDivElement>(null);
 
   function selectLanguage(option: Locale) {
     setOpen(false);
     if (option === lang) return;
     rememberLocale(option);
-    router.push(`/${option}${window.location.hash}`);
+    window.location.assign(`/${option}${window.location.hash}`);
   }
 
   useEffect(() => {
@@ -147,6 +151,7 @@ export function Header({
   labels: HeaderLabels;
 }) {
   const [open, setOpen] = useState(false);
+  useSystemThemeSync();
   const links = NAV_SECTIONS.map((id) => ({ href: `#${id}`, label: nav[id] }));
 
   return (
@@ -154,13 +159,12 @@ export function Header({
       <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-6">
         <div>
             <a href="#home" className="flex items-center gap-2 font-display text-xl font-extrabold tracking-tight text-foreground dark:text-primary">
-            <Image
-                src={icon}
+            <img
+                src="/icon.png"
                 alt="Logo"
                 width={32}
                 height={32}
                 className="h-7 w-7"
-                priority
             />
             Nadia Lahya
             </a>
