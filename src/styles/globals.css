@@ -5,6 +5,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  /* Defined by <Font> in Layout.astro (fonts in astro.config.ts) */
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-bricolage);
   --color-ink: var(--ink);
