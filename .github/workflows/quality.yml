@@ -21,8 +21,9 @@ jobs:
       - name: Lint
         run: pnpm lint
 
+      # Type-checks .ts, .tsx and .astro files
       - name: Type check
-        run: pnpm exec next typegen && pnpm exec tsc --noEmit
+        run: pnpm exec astro check
 
   dependencies-and-secrets:
     runs-on: ubuntu-latest
