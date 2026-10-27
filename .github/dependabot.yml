@@ -1,0 +1,33 @@
+version: 2
+
+updates:
+  - package-ecosystem: npm # also reads pnpm-lock.yaml
+    directory: /
+    schedule:
+      interval: weekly
+    # Leave a week for a compromised release to be caught before it is proposed
+    cooldown:
+      default-days: 7
+    groups:
+      npm-minor-and-patch:
+        update-types: [minor, patch]
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: github-actions # updates the pinned SHAs and their # vX comments
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        patterns: ["*"]
+
+  - package-ecosystem: docker # base images in the Dockerfile
+    directory: /
+    schedule:
+      interval: weekly
+    ignore:
+      # Stay on the Node LTS line, bumped by hand
+      - dependency-name: "*node"
+        update-types: [version-update:semver-major]
