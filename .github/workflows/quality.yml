@@ -3,6 +3,8 @@ name: Quality
 on:
   push:
     branches: [main]
+  pull_request: # Dependabot PRs
+    branches: [main]
 
 permissions:
   contents: read

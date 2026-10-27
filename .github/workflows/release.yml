@@ -40,7 +40,7 @@ jobs:
           run_id=""
           for _ in $(seq 1 12); do # the build run can take a few seconds to appear
             run_id=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow build.yml \
-                       --branch main --commit "$GITHUB_SHA" --limit 1 \
+                       --branch main --event push --commit "$GITHUB_SHA" --limit 1 \
                        --json databaseId --jq '.[0].databaseId // empty')
             [ -n "$run_id" ] && break
             sleep 5

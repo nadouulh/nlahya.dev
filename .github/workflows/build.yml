@@ -3,6 +3,9 @@ name: Build
 on:
   push:
     branches: [main]
+  # Pull requests (Dependabot) only build and scan: nothing is pushed or signed
+  pull_request:
+    branches: [main]
 
 permissions:
   contents: read
@@ -50,11 +53,13 @@ jobs:
           exit-code: "1"
 
       - name: Login GHCR
+        if: github.event_name == 'push'
         run: podman login ghcr.io -u "$GITHUB_ACTOR" --password-stdin <<< "$GHCR_TOKEN"
         env:
           GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push
+        if: github.event_name == 'push'
         id: push
         run: |
           podman push --digestfile digest.txt "${{ steps.image.outputs.commit }}"
@@ -64,9 +69,11 @@ jobs:
           echo "Image: ${{ steps.image.outputs.repo }}@$(cat digest.txt)" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Install cosign
+        if: github.event_name == 'push'
         uses: sigstore/cosign-installer@dc72c7d5c4d10cd6bcb8cf6e3fd625a9e5e537da # v3.7.0
 
       - name: Sign image (keyless)
+        if: github.event_name == 'push'
         run: |
           cosign login ghcr.io -u "$GITHUB_ACTOR" --password-stdin <<< "$GHCR_TOKEN"
           cosign sign --yes "${{ steps.image.outputs.repo }}@${{ steps.push.outputs.digest }}"
