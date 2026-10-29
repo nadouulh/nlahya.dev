@@ -181,10 +181,9 @@ export function WavyBackground() {
   }, [resolvedTheme]);
 
   return (
-    <div
-      ref={containerRef}
-      aria-hidden
-      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
-    />
+    // Positioned by its wrapper in the .astro page, outside the island:
+    // <astro-island> is display: contents, and Safari can stack a fixed
+    // element inside it above the page
+    <div ref={containerRef} className="h-full w-full" />
   );
 }

@@ -15,8 +15,12 @@ const t = getDictionary(lang);
 
 <Layout lang={lang} title={t.meta.title}>
   <div class="relative isolate overflow-x-clip">
-    <WavyBackground client:load />
+    <div aria-hidden="true" class="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+      <WavyBackground client:load />
+    </div>
     <SlideDots client:load labels={t.nav} />
-    <HomePage lang={lang} />
+    <div class="relative z-10">
+      <HomePage lang={lang} />
+    </div>
   </div>
 </Layout>

@@ -16,7 +16,11 @@ const text = getDictionary(lang).notFound;
 
 <Layout lang={lang} title={`404 · ${text.title}`} noindex>
   <div class="relative isolate overflow-x-clip">
-    <WavyBackground client:load />
-    <NotFoundContent lang={lang} text={text} />
+    <div aria-hidden="true" class="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+      <WavyBackground client:load />
+    </div>
+    <div class="relative z-10">
+      <NotFoundContent lang={lang} text={text} />
+    </div>
   </div>
 </Layout>
