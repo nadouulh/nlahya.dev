@@ -150,6 +150,11 @@ const TOOLS: Tool[] = [
     icon: <img src="/icons/argocd.svg" alt="" width={16} height={16} loading="lazy" decoding="async" className={ICON} />,
   },
   {
+    name: "OpenBao",
+    // Official logo (openbao/artwork, CC BY 4.0), viewBox cropped to the drawing
+    icon: <img src="/icons/openbao.svg" alt="" width={23} height={14} loading="lazy" decoding="async" className="h-3.5 w-auto shrink-0" />,
+  },
+  {
     name: "pre-commit",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" className={`${ICON} text-[#fab040]`} aria-hidden="true">
@@ -349,7 +354,7 @@ const GROUPS: { id: "railwai" | "projects" | "school"; tools: string[]; past?: b
   },
   {
     id: "projects",
-    tools: ["Linux", "Rust", "Python", "Bash", "Node.js", "PostgreSQL", "React", "shadcn/ui", "Ansible", "Proxmox", "Talos", "GitHub Actions", "GitLab CI"],
+    tools: ["Linux", "Rust", "Python", "Bash", "Node.js", "PostgreSQL", "React", "shadcn/ui", "Ansible", "Proxmox", "Talos", "OpenBao", "GitHub Actions", "GitLab CI"],
   },
   {
     id: "school",

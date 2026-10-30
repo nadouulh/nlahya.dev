@@ -52,7 +52,7 @@ const CONTACT_LINKS = [
   },
 ];
 
-const OMNI_STACK = ["React", "TypeScript", "Fastify", "PostgreSQL", "OpenTofu", "Kubernetes", "Proxmox"];
+const OMNI_STACK = ["React", "TypeScript", "Fastify", "PostgreSQL", "OpenTofu", "Kubernetes", "Proxmox", "OpenBao"];
 
 const PROJECTS = [
   {
