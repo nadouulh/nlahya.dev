@@ -25,9 +25,9 @@ const fr: Dictionary = {
   hero: {
     role: "Apprentie ingénieure DevOps",
     tagline:
-      "Je construis et j'automatise de l'infrastructure, des pipelines CI aux clusters Kubernetes, avec un faible pour les projets d'IA.",
+      "J'automatise le chemin du code à la production : conteneurs, pipelines CI/CD, GitOps et infrastructure cloud, avec un intérêt particulier pour les projets d'IA.",
     intro:
-      "Étudiante en 4e année d'ingénierie DevOps à Polytech Montpellier, en alternance chez RAILwAI.",
+      "Étudiante en 4e année d'ingénierie DevOps à Polytech Montpellier, j'effectue mon alternance chez RAILwAI.",
     cv: "Curriculum vitae",
     contact: "Me contacter",
     glanceTitle: "En bref",
@@ -88,7 +88,7 @@ const fr: Dictionary = {
       role: "Apprentie ingénieure DevOps",
       date: "Oct. 2025 — aujourd'hui",
       summary:
-        "Je travaille sur notre infrastructure hybride (**GCP**, **Scaleway** et on-premise) en tant que code avec **Terraform/OpenTofu**, je construis et maintiens les **pipelines CI** sur Bitbucket avec des hooks **pre-commit** et des scans de sécurité **Trivy**, et j'automatise les tâches récurrentes. Je rédige aussi la documentation technique, je relis le code de mes collègues, et j'applique et partage les **bonnes pratiques**.",
+        "Je gère l'infrastructure hybride (**GCP**, **Scaleway**, on-premise) avec **Terraform/OpenTofu**, je m'occupe des **pipelines CI** sur Bitbucket intégrant **pre-commit** et des scans **Trivy**, et j'automatise les routines d'exploitation. Je prends aussi en charge la documentation technique, la revue du code de mes collègues et la promotion des **bonnes pratiques**.",
     },
     research: {
       role: "Stagiaire en recherche IA",

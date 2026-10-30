@@ -23,9 +23,9 @@ const en = {
   hero: {
     role: "DevOps engineer apprentice",
     tagline:
-      "I build and automate infrastructure, from CI pipelines to Kubernetes clusters, with a soft spot for AI projects.",
+      "I automate the path from code to production: containers, CI/CD pipelines, GitOps and cloud infrastructure, with a particular interest in AI projects.",
     intro:
-      "Fourth-year DevOps engineering student at Polytech Montpellier, on a work-study contract at RAILwAI.",
+      "Fourth-year DevOps engineering student at Polytech Montpellier, doing my apprenticeship at RAILwAI.",
     cv: "Curriculum vitae",
     contact: "Get in touch",
     glanceTitle: "At a glance",
@@ -62,7 +62,7 @@ const en = {
       description: "Event-driven data processing app built as a team of four: a Rust API streams uploads to S3 and queues jobs in Redis, and Rust workers run the pipelines. I participated in architectural decisions and CI, wrote some of the worker pipelines (filter, aggregate, group by) and part of the API and React frontend.",
     },
     doremix: {
-      tag: "school project",
+      tag: "team project",
       description: "Web app and CLI to share community playlists built from YouTube links: FastAPI backend with PostgreSQL, Typer CLI, Docker Compose setups for dev and production, pytest tests and API rate limiting.",
     },
   },
@@ -85,7 +85,7 @@ const en = {
       role: "DevOps Engineering Apprentice",
       date: "Oct 2025 — Now",
       summary:
-        "I work on our hybrid infrastructure (**GCP**, **Scaleway** and on-premise) as code with **Terraform/OpenTofu**, build and maintain the **CI pipelines** in Bitbucket with **pre-commit** hooks and **Trivy** security scans, and automate recurring tasks. I also write technical documentation, review my teammates' code, and apply and share **good practices**.",
+        "I manage the hybrid infrastructure (**GCP**, **Scaleway**, on-premise) with **Terraform/OpenTofu**, look after the **CI pipelines** in Bitbucket with **pre-commit** and **Trivy** scans, and automate operational routines. I also handle the technical documentation, review my teammates' code and promote **good practices**.",
     },
     research: {
       role: "AI Research Intern",
