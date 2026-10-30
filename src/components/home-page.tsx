@@ -57,7 +57,7 @@ const OMNI_STACK = ["React", "TypeScript", "Fastify", "PostgreSQL", "OpenTofu", 
 const PROJECTS = [
   {
     id: "barenetes",
-    title: "Barenetes",
+    title: "barenetes",
     href: "https://github.com/do-2k25-28/Barenetes",
     stack: ["Rust", "gRPC", "etcd", "mTLS"],
   },
@@ -69,7 +69,7 @@ const PROJECTS = [
   },
   {
     id: "doremix",
-    title: "DoRémix",
+    title: "doremix",
     href: "https://github.com/nadouulh/doremix",
     stack: ["Python", "FastAPI", "Typer", "PostgreSQL", "Docker"],
   },
@@ -217,7 +217,7 @@ export function HomePage({ lang }: { lang: Locale }) {
                 </span>
                 <span className={chip}>{t.projects.omni.tag}</span>
               </div>
-              <h3 className="font-display text-4xl font-extrabold leading-none tracking-tight">Omni</h3>
+              <h3 className="font-display text-4xl font-extrabold leading-none tracking-tight">omni</h3>
               <p className="text-pretty">{t.projects.omni.description}</p>
               <StackList stack={OMNI_STACK} />
               <p className="flex items-center gap-2 text-sm font-medium text-link">
@@ -246,7 +246,7 @@ export function HomePage({ lang }: { lang: Locale }) {
                   i === PROJECTS.length - 1 && PROJECTS.length % 2 === 1 && "md:col-span-2 lg:col-span-1"
                 )}
               >
-                <header className="flex flex-wrap items-center justify-between gap-2">
+                <header className="flex flex-col items-start gap-2">
                   <h3 className="font-display text-[28px] font-extrabold leading-tight tracking-tight">
                     {project.title}
                   </h3>
