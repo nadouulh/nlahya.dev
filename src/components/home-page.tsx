@@ -9,6 +9,7 @@ import {
   RefreshCcw,
   Users,
 } from "lucide-react";
+import { cn } from "cn";
 import { Footer } from "@/components/ui/footer";
 import { Card, SectionHeading } from "@/components/ui/card";
 import { Tools } from "@/components/ui/tools";
@@ -59,6 +60,12 @@ const PROJECTS = [
     title: "Barenetes",
     href: "https://github.com/do-2k25-28/Barenetes",
     stack: ["Rust", "gRPC", "etcd", "mTLS"],
+  },
+  {
+    id: "datagofast",
+    title: "data-go-fast",
+    href: "https://github.com/DO-JENC/data-go-fast",
+    stack: ["Rust", "Axum", "Redis", "PostgreSQL", "S3", "React"],
   },
   {
     id: "doremix",
@@ -229,11 +236,15 @@ export function HomePage({ lang }: { lang: Locale }) {
             </figure>
           </article>
 
-          <div className="grid gap-5 md:grid-cols-2">
-            {PROJECTS.map((project) => (
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {PROJECTS.map((project, i) => (
               <article
                 key={project.id}
-                className="flex min-w-0 flex-col gap-3.5 rounded-2xl border border-hairline bg-surface-inner p-6 transition-transform hover:-translate-y-1 sm:p-7"
+                className={cn(
+                  "flex min-w-0 flex-col gap-3.5 rounded-2xl border border-hairline bg-surface-inner p-6 transition-transform hover:-translate-y-1 sm:p-7",
+                  // On two columns, a last card alone on its row takes the full width
+                  i === PROJECTS.length - 1 && PROJECTS.length % 2 === 1 && "md:col-span-2 lg:col-span-1"
+                )}
               >
                 <header className="flex flex-wrap items-center justify-between gap-2">
                   <h3 className="font-display text-[28px] font-extrabold leading-tight tracking-tight">

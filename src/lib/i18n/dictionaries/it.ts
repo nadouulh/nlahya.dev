@@ -59,6 +59,10 @@ const it: Dictionary = {
       tag: "open source",
       description: "Reimplementazione minimale di Kubernetes in Rust, realizzata in team: ho lavorato sull'API server, altri sullo scheduler, sull'agente dei nodi e sulla CLI.",
     },
+    datagofast: {
+      tag: "progetto di gruppo",
+      description: "App di elaborazione dati event-driven, realizzata in quattro: un'API in Rust invia i file a S3 e mette i job in coda su Redis, e dei worker in Rust eseguono le pipeline. Ho partecipato alle decisioni architetturali e alla CI, scritto alcune delle pipeline del worker (filtro, aggregazione, raggruppamento), parte dell'API e del frontend React.",
+    },
     doremix: {
       tag: "progetto scolastico",
       description: "Web app e CLI per condividere playlist collettive a partire da link YouTube: backend FastAPI con PostgreSQL, CLI in Typer, ambienti Docker Compose di sviluppo e produzione, test pytest e rate limiting sull'API.",

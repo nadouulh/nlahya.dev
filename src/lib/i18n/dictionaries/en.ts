@@ -57,6 +57,10 @@ const en = {
       tag: "open source",
       description: "Minimal reimplementation of Kubernetes in Rust, built as a team: I worked on the API server, others on the scheduler, the node agent and the CLI.",
     },
+    datagofast: {
+      tag: "team project",
+      description: "Event-driven data processing app built as a team of four: a Rust API streams uploads to S3 and queues jobs in Redis, and Rust workers run the pipelines. I participated in architectural decisions and CI, wrote some of the worker pipelines (filter, aggregate, group by) and part of the API and React frontend.",
+    },
     doremix: {
       tag: "school project",
       description: "Web app and CLI to share community playlists built from YouTube links: FastAPI backend with PostgreSQL, Typer CLI, Docker Compose setups for dev and production, pytest tests and API rate limiting.",
