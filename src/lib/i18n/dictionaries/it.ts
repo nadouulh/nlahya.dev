@@ -4,7 +4,7 @@ const it: Dictionary = {
   meta: {
     title: "Nadia Lahya - Apprendista ingegnera DevOps",
     description:
-      "Apprendista ingegnera DevOps in RAILwAI, costruisco l'infrastruttura di un'IA utile nel mondo reale. Disponibile per un tirocinio DevOps, Cloud o IA (giugno–settembre 2027).",
+      "Apprendista ingegnera DevOps in RAILwAI, costruisco l'infrastruttura di un'IA utile nel mondo reale. Alla ricerca di un tirocinio DevOps, Cloud o IA (giugno–settembre 2027).",
   },
   nav: {
     home: "Home",
@@ -27,7 +27,7 @@ const it: Dictionary = {
     tagline:
       "Automatizzo il percorso dal codice alla produzione: container, pipeline CI/CD, GitOps e infrastruttura cloud, con un interesse particolare per i progetti di IA.",
     intro:
-      "Studentessa al quarto anno di ingegneria DevOps presso Polytech Montpellier, sto svolgendo il mio apprendistato a RAILwAI.",
+      "Studentessa al quarto anno di ingegneria DevOps presso Polytech Montpellier, sto svolgendo il mio apprendistato in RAILwAI.",
     cv: "Curriculum vitae",
     contact: "Contattami",
     glanceTitle: "In breve",
@@ -36,11 +36,11 @@ const it: Dictionary = {
       { label: "Pubblicazione", value: "Articolo e poster ACM, MOCO'26" },
       { label: "Lavoro", value: "GCP · OpenTofu · CI/CD" },
       { label: "Vivo a", value: "Montpellier, Francia" },
-      { label: "Lingue", value: "Francese · italiano · arabo · inglese" },
-      { label: "Tempo libero", value: "Karate, 7 anni individuale e a squadre · disegno · calligrafia" },
+      { label: "Lingue", value: "Francese · italiano · inglese · arabo" },
+      { label: "Tempo libero", value: "Karate (7 anni di gare individuali e a squadra) · disegno · calligrafia" },
     ],
     availability:
-      "Disponibile per un tirocinio in **DevOps, Cloud o IA** · giu–set 2027 (min. 9 settimane)",
+      "Alla ricerca di un tirocinio in **DevOps, Cloud o IA** · giu–set 2027 (min. 9 settimane)",
   },
   projects: {
     index: "01 — Progetti",
@@ -57,11 +57,11 @@ const it: Dictionary = {
     },
     barenetes: {
       tag: "open source",
-      description: "Reimplementazione minimale di Kubernetes in Rust, realizzata in team: ho lavorato sull'API server, altri sullo scheduler, sull'agente dei nodi e sulla CLI.",
+      description: "Reimplementazione minimale di Kubernetes in Rust, realizzata in team. Ho lavorato sull'API server: ho progettato i contratti gRPC in Protobuf condivisi da tutti i componenti, implementato alcuni degli handler gRPC e lo storage persistente su etcd.",
     },
     datagofast: {
-      tag: "progetto di gruppo",
-      description: "App di elaborazione dati event-driven, realizzata in quattro: un'API in Rust invia i file a S3 e mette i job in coda su Redis, e dei worker in Rust eseguono le pipeline. Ho partecipato alle decisioni architetturali e alla CI, scritto alcune delle pipeline del worker (filtro, aggregazione, raggruppamento), parte dell'API e del frontend React.",
+      tag: "progetto scolastico",
+      description: "App di elaborazione dati event-driven, realizzata in quattro: un'API in Rust invia i file a S3 e mette i job in coda su Redis, e dei worker in Rust eseguono le pipeline. Ho partecipato alle decisioni architetturali e alla CI, scritto alcune delle pipeline del worker e parte dell'API e del frontend React.",
     },
     doremix: {
       tag: "progetto scolastico",
@@ -110,11 +110,11 @@ const it: Dictionary = {
     index: "03 — Soft skills",
     title: "Come lavoro",
     items: [
-      { title: "Comunicazione", proof: "Scrivo la documentazione su cui si basa il mio team, registro le scelte architetturali negli ADR e ho presentato la mia ricerca con un poster al MOCO'26." },
-      { title: "Collaborazione", proof: "Omni è sviluppato da 16 persone: allo sprint precedente ero sviluppatrice, ora faccio parte del team ops di quattro. In RAILwAI mi confronto con gli sviluppatori per capire le loro soluzioni prima di distribuirle, e tengo aggiornati i miei responsabili su progressi e blocchi." },
+      { title: "Comunicazione", proof: "Documento il mio lavoro per tenerne traccia e poterci tornare sopra, e mi serve anche per i report del mio apprendistato. In team annoto i miei progressi e le scelte tecniche, perché restino comprensibili a chi non c'era e per accompagnare le mie merge request. Al MOCO'26 ho presentato la mia ricerca con un poster." },
+      { title: "Collaborazione", proof: "Omni è sviluppato da 16 persone: allo sprint precedente ero sviluppatrice, ora faccio parte del team \"ops\" di quattro. In RAILwAI mi confronto con gli sviluppatori per capire le loro soluzioni prima di distribuirle, e tengo aggiornati i miei responsabili su progressi e blocchi." },
       { title: "Feedback", proof: "In ogni progetto non esito a dire cosa ha funzionato bene e cosa ha creato problemi. Nelle code review in RAILwAI do feedback costruttivi e imparo da quelli dei colleghi." },
-      { title: "Apprendimento rapido", proof: "Prima del tirocinio di ricerca sapevo poco di IA, e si è concluso con un articolo pubblicato da ACM. Per Omni ho imparato Talos, Proxmox e VXLAN sul campo, e mi sono messa al Rust per Barenetes." },
-      { title: "Rigore", proof: "Tengo alla qualità di tutto ciò che produco, non solo del codice. Sul lato infrastruttura, tutto ciò su cui lavoro è descritto come codice, passa in revisione e segue le buone pratiche del team, con hook pre-commit e scansioni Trivy che individuano i problemi prima del rilascio." },
+      { title: "Apprendimento rapido", proof: "Sapevo poco di IA prima del tirocinio di ricerca, che si è concluso con un articolo pubblicato da ACM. Per Omni ho imparato Talos, Proxmox e VXLAN sul campo, e mi sono messa al Rust per Barenetes." },
+      { title: "Rigore", proof: "Tengo alla qualità di tutto ciò che produco, non solo del codice. Lato infrastruttura, tutto ciò su cui lavoro è descritto come codice, passa in revisione e segue le buone pratiche del team, con hook pre-commit e scansioni Trivy che individuano i problemi prima del rilascio." },
     ],
   },
   tools: {
@@ -129,10 +129,10 @@ const it: Dictionary = {
   now: {
     index: "05 — Adesso",
     title: "In questo momento",
-    lead: "Sviluppo **Omni**, una suite collaborativa self-hosted che gira su Talos Kubernetes sopra un cluster Proxmox.",
+    lead: "Lavoro su **Omni**, una suite collaborativa self-hosted che gira su Talos Kubernetes sopra un cluster Proxmox.",
     detail:
       "Siamo un team di quattro persone sull'infrastruttura di Omni: ci dividiamo il lavoro, ci coordiniamo e ci formiamo strada facendo. Insieme stiamo migrando da Dokku a Kubernetes (VM Talos Linux su un cluster Proxmox, provisionate con OpenTofu), e sia lo staging sia la produzione funzioneranno così. Documentiamo ogni passaggio per tutto il team e registriamo ogni scelta architetturale in un architectural decision record (ADR).",
-    updated: "Aggiornato · ottobre 2026",
+    updated: "Aggiornato · novembre 2026",
   },
   notFound: {
     title: "Pagina non trovata",

@@ -4,7 +4,7 @@ const fr: Dictionary = {
   meta: {
     title: "Nadia Lahya - Apprentie ingénieure DevOps",
     description:
-      "Apprentie ingénieure DevOps chez RAILwAI, je construis l'infrastructure d'une IA utile au quotidien. Ouverte à un stage DevOps, Cloud ou IA (juin–septembre 2027).",
+      "Apprentie ingénieure DevOps chez RAILwAI, je construis l'infrastructure d'une IA utile au quotidien. À la recherche d'un stage DevOps, Cloud ou IA (juin–septembre 2027).",
   },
   nav: {
     home: "Accueil",
@@ -36,11 +36,11 @@ const fr: Dictionary = {
       { label: "Publication", value: "Article et poster ACM, MOCO'26" },
       { label: "Alternance", value: "GCP · OpenTofu · CI/CD" },
       { label: "Basée à", value: "Montpellier, France" },
-      { label: "Langues", value: "Français · italien · arabe · anglais" },
-      { label: "Loisirs", value: "Karaté, 7 ans en individuel et en équipe · dessin · calligraphie" },
+      { label: "Langues", value: "Français · italien · anglais · arabe" },
+      { label: "Loisirs", value: "Karaté (7 ans en individuel et en équipe) · dessin · calligraphie" },
     ],
     availability:
-      "Ouverte à un stage en **DevOps, Cloud ou IA** · juin–sept. 2027 (9 semaines min.)",
+      "À la recherche d'un stage en **DevOps, Cloud ou IA** · juin–sept. 2027 (9 semaines min.)",
   },
   projects: {
     index: "01 — Projets",
@@ -57,11 +57,11 @@ const fr: Dictionary = {
     },
     barenetes: {
       tag: "open source",
-      description: "Réimplémentation minimale de Kubernetes en Rust, construite en équipe : j'ai travaillé sur l'API, d'autres sur le scheduler, l'agent des nœuds et la CLI.",
+      description: "Réimplémentation minimale de Kubernetes en Rust, construite en équipe. Sur l'API server, j'ai conçu les contrats gRPC en Protobuf partagés par tous les composants, implémenté certains des handlers gRPC et le stockage persistant sur etcd.",
     },
     datagofast: {
-      tag: "projet d'équipe",
-      description: "Application de traitement de données orientée événements, construite à quatre : une API en Rust envoie les fichiers vers S3 et place les jobs dans Redis, et des workers en Rust exécutent les pipelines. J'ai participé aux décisions architecturales et à la CI, écrit certaines des pipelines du worker (filtre, agrégation, regroupement), une partie de l'API et du front React.",
+      tag: "projet d'école",
+      description: "Application de traitement de données orientée événements, construite à quatre : une API en Rust envoie les fichiers vers S3 et place les jobs dans Redis, et des workers en Rust exécutent les pipelines. J'ai participé aux décisions architecturales et à la CI, écrit certains des pipelines du worker ainsi qu'une partie de l'API et du front React.",
     },
     doremix: {
       tag: "projet d'école",
@@ -111,11 +111,11 @@ const fr: Dictionary = {
     index: "03 — Savoir-être",
     title: "Ma façon de travailler",
     items: [
-      { title: "Communication", proof: "Je rédige la documentation sur laquelle s'appuie mon équipe, je consigne les choix d'architecture dans des ADR et j'ai présenté mes recherches en poster à MOCO'26." },
-      { title: "Collaboration", proof: "Omni se construit à 16 : j'étais développeuse au sprint précédent et je fais maintenant partie de l'équipe ops de quatre. Chez RAILwAI, j'échange avec les devs pour comprendre leurs solutions avant de les déployer, et je tiens mes responsables au courant de mes avancées et de mes blocages." },
+      { title: "Communication", proof: "Je documente mon travail pour en garder une trace et pouvoir y revenir, ce qui me sert aussi pour les rapports de mon alternance. En équipe, je consigne mes avancées et mes choix techniques pour qu'ils restent compréhensibles par quelqu'un qui n'était pas là, et pour accompagner mes merge requests. À MOCO'26, j'ai présenté mes recherches en poster." },
+      { title: "Collaboration", proof: "Omni se construit à 16 : j'étais développeuse au sprint précédent et je fais maintenant partie de l'équipe \"ops\" de quatre. Chez RAILwAI, j'échange avec les devs pour comprendre leurs solutions avant de les déployer, et je tiens mes responsables au courant de mes avancées et de mes blocages." },
       { title: "Feedback", proof: "Sur tous les projets, je n'hésite pas à dire ce qui a bien marché et ce qui a posé problème. Dans les revues de code chez RAILwAI, je fais des retours constructifs et j'apprends de ceux de mes collègues." },
       { title: "Apprentissage rapide", proof: "Je ne connaissais pas grand-chose à l'IA avant mon stage de recherche, qui s'est terminé par un article publié chez ACM. Pour Omni, j'ai appris Talos, Proxmox et le VXLAN sur le tas, et je me suis mise au Rust pour Barenetes." },
-      { title: "Rigueur", proof: "Je tiens à la qualité de tout ce que je produis, pas seulement du code. Côté infrastructure, tout ce sur quoi je travaille est décrit en code, passe en revue et suit les bonnes pratiques de l'équipe, avec des hooks pre-commit et des scans Trivy qui repèrent les problèmes avant la mise en production." },
+      { title: "Rigueur", proof: "Je tiens à la qualité de tout ce que je produis, pas seulement du code. Côté infrastructure, tout ce sur quoi je travaille est décrit sous forme de code, passe par une revue et suit les bonnes pratiques de l'équipe, avec des hooks pre-commit et des scans Trivy qui repèrent les problèmes avant la mise en production." },
     ],
   },
   tools: {
@@ -130,10 +130,10 @@ const fr: Dictionary = {
   now: {
     index: "05 — Actuellement",
     title: "En ce moment",
-    lead: "Je construis **Omni**, une suite collaborative auto-hébergeable qui tourne sur Kubernetes Talos au-dessus d'un cluster Proxmox.",
+    lead: "Je travaille sur **Omni**, une suite collaborative auto-hébergeable qui tourne sur Kubernetes Talos au-dessus d'un cluster Proxmox.",
     detail:
-      "Nous sommes une équipe de quatre sur l'infrastructure d'Omni : on se répartit le travail, on se coordonne et on se forme au fur et à mesure. Ensemble, nous migrons de Dokku vers Kubernetes (VMs Talos Linux sur un cluster Proxmox, provisionnées avec OpenTofu), et le staging comme la production fonctionneront ainsi. Nous documentons chaque étape pour toute l'équipe et consignons chaque choix d'architecture dans un architectural decision record (ADR).",
-    updated: "Mis à jour · octobre 2026",
+      "Nous sommes une équipe de quatre sur l'infrastructure d'Omni : nous nous répartissons le travail, nous nous coordonnons et nous nous formons au fur et à mesure. Ensemble, nous migrons de Dokku vers Kubernetes (VM Talos Linux sur un cluster Proxmox, provisionnées avec OpenTofu), et le staging comme la production fonctionneront ainsi. Nous documentons chaque étape pour toute l'équipe et consignons chaque choix d'architecture dans un architectural decision record (ADR).",
+    updated: "Mis à jour · novembre 2026",
   },
   notFound: {
     title: "Page introuvable",

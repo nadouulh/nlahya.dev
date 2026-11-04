@@ -2,7 +2,7 @@ const en = {
   meta: {
     title: "Nadia Lahya - DevOps Engineer Apprentice",
     description:
-      "DevOps engineering apprentice at RAILwAI building infrastructure for AI that does real-world good. Open to a DevOps, Cloud or AI internship (June–September 2027).",
+      "DevOps engineering apprentice at RAILwAI building infrastructure for AI that does real-world good. Looking for a DevOps, Cloud or AI internship (June–September 2027).",
   },
   nav: {
     home: "Home",
@@ -34,11 +34,11 @@ const en = {
       { label: "Published", value: "ACM paper & poster, MOCO'26" },
       { label: "Day job", value: "GCP · OpenTofu · CI/CD" },
       { label: "Based in", value: "Montpellier, France" },
-      { label: "Languages", value: "French · Italian · Arabic · English" },
-      { label: "Outside work", value: "Karate, 7 years in individual and team events · drawing · calligraphy" },
+      { label: "Languages", value: "French · Italian · English · Arabic" },
+      { label: "Hobbies", value: "Karate (7 years in individual and team events) · drawing · calligraphy" },
     ],
     availability:
-      "Open to a **DevOps, Cloud or AI** internship · Jun–Sep 2027 (min. 9 weeks)",
+      "Looking for a **DevOps, Cloud or AI** internship · Jun–Sep 2027 (min. 9 weeks)",
   },
   projects: {
     index: "01 — Projects",
@@ -55,14 +55,14 @@ const en = {
     },
     barenetes: {
       tag: "open source",
-      description: "Minimal reimplementation of Kubernetes in Rust, built as a team: I worked on the API server, others on the scheduler, the node agent and the CLI.",
+      description: "Minimal reimplementation of Kubernetes in Rust, built as a team. On the API server, I designed the Protobuf gRPC contracts shared by every component, implemented some of the gRPC handlers and built persistent storage on etcd.",
     },
     datagofast: {
-      tag: "team project",
-      description: "Event-driven data processing app built as a team of four: a Rust API streams uploads to S3 and queues jobs in Redis, and Rust workers run the pipelines. I participated in architectural decisions and CI, wrote some of the worker pipelines (filter, aggregate, group by) and part of the API and React frontend.",
+      tag: "school project",
+      description: "Event-driven data processing app built in a team of four: a Rust API streams uploads to S3 and queues jobs in Redis, and Rust workers run the pipelines. I took part in architectural decisions and CI, wrote some of the worker pipelines and part of the API and React frontend.",
     },
     doremix: {
-      tag: "team project",
+      tag: "school project",
       description: "Web app and CLI to share community playlists built from YouTube links: FastAPI backend with PostgreSQL, Typer CLI, Docker Compose setups for dev and production, pytest tests and API rate limiting.",
     },
   },
@@ -108,10 +108,10 @@ const en = {
     index: "03 — Soft skills",
     title: "How I work",
     items: [
-      { title: "Communication", proof: "I write the documentation my teammates rely on, record architecture choices in ADRs, and presented my research as a poster at MOCO'26." },
-      { title: "Collaboration", proof: "Omni is built by 16 people: I was a developer last sprint and now work in the 4-person ops team. At RAILwAI, I talk with the developers to understand their solutions before deploying them, and keep my managers updated on my progress and blockers." },
+      { title: "Communication", proof: "I document my work to keep a record I can come back to, which also feeds the reports for my apprenticeship. In team projects, I write up my progress and technical choices so that anyone who wasn't there can follow them, and to back up my merge requests. At MOCO'26, I presented my research as a poster." },
+      { title: "Collaboration", proof: "Omni is built by 16 people: I was a developer last sprint and now work in the 4-person \"ops\" team. At RAILwAI, I talk with the developers to understand their solutions before deploying them, and keep my managers updated on my progress and blockers." },
       { title: "Feedback", proof: "On every project, I openly say what worked well and what caused problems. In code reviews at RAILwAI, I give constructive feedback and learn from my teammates'." },
-      { title: "Learning fast", proof: "I knew little about AI before my research internship, and it ended with a published ACM paper. For Omni, I learned Talos, Proxmox and VXLAN on the job, and picked up Rust for Barenetes." },
+      { title: "Learning fast", proof: "I knew little about AI before my research internship, which ended with a published ACM paper. For Omni, I learned Talos, Proxmox and VXLAN on the job, and picked up Rust for Barenetes." },
       { title: "Rigor", proof: "I care about quality in everything I produce, not just code. On the infrastructure side, everything I work on is described as code, goes through review and follows the team's good practices, with pre-commit hooks and Trivy scans catching problems before they ship." },
     ],
   },
@@ -129,8 +129,8 @@ const en = {
     title: "Currently",
     lead: "Building **Omni**, a self-hostable collaboration suite running on Talos Kubernetes over a Proxmox cluster.",
     detail:
-      "We are a team of four on Omni's infrastructure, splitting the work, coordinating and teaching ourselves as we go. Together we are migrating from Dokku to Kubernetes (Talos Linux VMs on a Proxmox cluster, provisioned with OpenTofu), and both staging and production will run this way. We document every step for the whole team and record each architecture choice in an architectural decision record (ADR).",
-    updated: "Last updated · October 2026",
+      "We are a team of four working on Omni's infrastructure, splitting the work, coordinating and teaching ourselves as we go. Together we are migrating from Dokku to Kubernetes (Talos Linux VMs on a Proxmox cluster, provisioned with OpenTofu), and both staging and production will run this way. We document every step for the whole team and record each architecture choice in an architectural decision record (ADR).",
+    updated: "Last updated · November 2026",
   },
   notFound: {
     title: "Page not found",
