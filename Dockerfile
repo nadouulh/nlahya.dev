@@ -20,7 +20,11 @@ RUN corepack enable pnpm && pnpm lint && pnpm build
 FROM docker.io/nginxinc/nginx-unprivileged:stable-alpine AS runner
 # Apply Alpine security fixes released after the base image was built
 USER root
-RUN apk upgrade --no-cache
+# nginx.org pins its nginx package and modules: swap them for Alpine's nginx,
+# which gets security fixes before the base image is rebuilt (modules unused)
+RUN apk del --no-cache nginx-module-geoip nginx-module-image-filter nginx-module-njs nginx-module-xslt \
+ && apk upgrade --no-cache \
+ && apk add --no-cache 'nginx>=1.30.7'
 USER 101
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY nginx/security-headers.conf /etc/nginx/security-headers.conf
