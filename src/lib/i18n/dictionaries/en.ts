@@ -8,6 +8,7 @@ const en = {
     home: "Home",
     projects: "Projects",
     experience: "Experience",
+    volunteering: "Volunteering",
     skills: "How I work",
     tools: "Tools",
     now: "Now",
@@ -33,6 +34,7 @@ const en = {
       { label: "Now", value: "Building Omni on Talos Kubernetes" },
       { label: "Published", value: "ACM paper & poster, MOCO'26" },
       { label: "Day job", value: "GCP · OpenTofu · CI/CD" },
+      { label: "Community", value: "CNCF Montpellier meetups · Polycloud" },
       { label: "Based in", value: "Montpellier, France" },
       { label: "Languages", value: "French · Italian · English · Arabic" },
       { label: "Hobbies", value: "Karate (7 years in individual and team events) · drawing · calligraphy" },
@@ -104,8 +106,19 @@ const en = {
       code: "Code",
     },
   },
+  volunteering: {
+    index: "03 — Volunteering",
+    title: "Beyond work",
+    polycloud: {
+      role: "Polycloud Organizer",
+      position: "Head of Communication",
+      date: "2027 edition",
+      summary:
+        "Organizing a free tech conference at Polytech Montpellier (Cloud, DevOps, AI, Security). Running social media and e-mail campaigns (speakers, CFP, attendees), and on-site coordination on the day: photos, decoration, goodies and welcoming attendees. Helping the other teams whenever needed.",
+    },
+  },
   skills: {
-    index: "03 — Soft skills",
+    index: "04 — Soft skills",
     title: "How I work",
     items: [
       { title: "Communication", proof: "I document my work to keep a record I can come back to, which also feeds the reports for my apprenticeship. In team projects, I write up my progress and technical choices so that anyone who wasn't there can follow them, and to back up my merge requests. At MOCO'26, I presented my research as a poster." },
@@ -116,7 +129,7 @@ const en = {
     ],
   },
   tools: {
-    index: "04 — Tools",
+    index: "05 — Tools",
     title: "What I work with",
     groups: {
       railwai: "Every day at RAILwAI",
@@ -125,11 +138,13 @@ const en = {
     },
   },
   now: {
-    index: "05 — Now",
+    index: "06 — Now",
     title: "Currently",
     lead: "Building **Omni**, a self-hostable collaboration suite running on Talos Kubernetes over a Proxmox cluster.",
     detail:
       "We are a team of four working on Omni's infrastructure, splitting the work, coordinating and teaching ourselves as we go. Together we are migrating from Dokku to Kubernetes (Talos Linux VMs on a Proxmox cluster, provisioned with OpenTofu), and both staging and production will run this way. We document every step for the whole team and record each architecture choice in an architectural decision record (ADR).",
+    polycloud:
+      "On the **Polycloud** side, we just launched the call for papers with an e-mail campaign, and I'm preparing the next posts for our social media.",
     updated: "Last updated · November 2026",
   },
   notFound: {
@@ -138,7 +153,7 @@ const en = {
     back: "Back home",
   },
   contact: {
-    index: "06 — Contact",
+    index: "07 — Contact",
     titleStart: "Let's build something ",
     titleHighlight: "useful",
     titleEnd: ".",

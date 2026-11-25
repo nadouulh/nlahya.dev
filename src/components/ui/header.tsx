@@ -19,7 +19,7 @@ import type { Dictionary } from "@/lib/i18n/dictionaries/en";
 
 type HeaderLabels = Dictionary["header"];
 
-const NAV_SECTIONS = ["projects", "experience", "tools", "now", "contact"] as const;
+const NAV_SECTIONS = ["projects", "experience", "volunteering", "tools", "now", "contact"] as const;
 
 function ThemeToggle({ labels }: { labels: HeaderLabels }) {
   const current = useTheme();
@@ -156,9 +156,9 @@ export function Header({
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b bg-background/80 text-foreground backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-6">
+      <div className="mx-auto flex h-14 w-full max-w-[88rem] items-center justify-between px-6">
         <div>
-            <a href="#home" className="flex items-center gap-2 font-display text-xl font-extrabold tracking-tight text-foreground dark:text-primary">
+            <a href="#home" className="flex items-center gap-2 whitespace-nowrap font-display text-xl font-extrabold tracking-tight text-foreground dark:text-primary">
             <img
                 src="/icon.png"
                 alt="Logo"
@@ -170,12 +170,12 @@ export function Header({
             </a>
         </div>
         <div className="flex items-center gap-2">
-          <nav className="hidden items-center gap-1 md:flex">
+          <nav className="hidden items-center gap-1 lg:flex">
             {links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="hover:font-semibold rounded-md px-4 py-2 text-base text-muted-foreground transition-colors hover:text-foreground dark:hover:text-foreground dark:text-primary"
+                className="hover:font-semibold rounded-md px-3 py-2 text-base xl:px-4 text-muted-foreground transition-colors hover:text-foreground dark:hover:text-foreground dark:text-primary"
               >
                 {link.label}
               </a>
@@ -186,7 +186,7 @@ export function Header({
             <ThemeToggle labels={labels} />
             <Button
               size="icon"
-              className="size-9 md:hidden"
+              className="size-9 lg:hidden"
               aria-label={open ? labels.closeMenu : labels.openMenu}
               aria-expanded={open}
               onClick={() => setOpen((value) => !value)}
@@ -197,8 +197,8 @@ export function Header({
         </div>
       </div>
       {open ? (
-        <nav className="border-t md:hidden">
-          <div className="mx-auto flex w-full max-w-6xl flex-col gap-1 px-6 py-5">
+        <nav className="border-t lg:hidden">
+          <div className="mx-auto flex w-full max-w-[88rem] flex-col gap-1 px-6 py-5">
             {links.map((link) => (
               <a
                 key={link.href}

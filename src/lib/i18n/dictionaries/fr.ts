@@ -10,6 +10,7 @@ const fr: Dictionary = {
     home: "Accueil",
     projects: "Projets",
     experience: "Expérience",
+    volunteering: "Bénévolat",
     skills: "Savoir-être",
     tools: "Outils",
     now: "Actuellement",
@@ -35,6 +36,7 @@ const fr: Dictionary = {
       { label: "En ce moment", value: "Je construis Omni sur Talos Kubernetes" },
       { label: "Publication", value: "Article et poster ACM, MOCO'26" },
       { label: "Alternance", value: "GCP · OpenTofu · CI/CD" },
+      { label: "Communauté", value: "Meetups CNCF Montpellier · Polycloud" },
       { label: "Basée à", value: "Montpellier, France" },
       { label: "Langues", value: "Français · italien · anglais · arabe" },
       { label: "Loisirs", value: "Karaté (7 ans en individuel et en équipe) · dessin · calligraphie" },
@@ -107,8 +109,19 @@ const fr: Dictionary = {
       code: "Code",
     },
   },
+  volunteering: {
+    index: "03 — Bénévolat",
+    title: "En dehors du travail",
+    polycloud: {
+      role: "Organisatrice de la Polycloud",
+      position: "Responsable communication",
+      date: "Édition 2027",
+      summary:
+        "Organisation d'une conférence tech gratuite à Polytech Montpellier (Cloud, DevOps, IA, Sécurité). Gestion des réseaux sociaux et des campagnes d'e-mails (speakers, CFP, public), et coordination sur place le jour J : photos, décoration, goodies et accueil des participants. Renfort des autres équipes selon les besoins.",
+    },
+  },
   skills: {
-    index: "03 — Savoir-être",
+    index: "04 — Savoir-être",
     title: "Ma façon de travailler",
     items: [
       { title: "Communication", proof: "Je documente mon travail pour en garder une trace et pouvoir y revenir, ce qui me sert aussi pour les rapports de mon alternance. En équipe, je consigne mes avancées et mes choix techniques pour qu'ils restent compréhensibles par quelqu'un qui n'était pas là, et pour accompagner mes merge requests. À MOCO'26, j'ai présenté mes recherches en poster." },
@@ -119,7 +132,7 @@ const fr: Dictionary = {
     ],
   },
   tools: {
-    index: "04 — Outils",
+    index: "05 — Outils",
     title: "Avec quoi je travaille",
     groups: {
       railwai: "Au quotidien chez RAILwAI",
@@ -128,11 +141,13 @@ const fr: Dictionary = {
     },
   },
   now: {
-    index: "05 — Actuellement",
+    index: "06 — Actuellement",
     title: "En ce moment",
     lead: "Je travaille sur **Omni**, une suite collaborative auto-hébergeable qui tourne sur Kubernetes Talos au-dessus d'un cluster Proxmox.",
     detail:
       "Nous sommes une équipe de quatre sur l'infrastructure d'Omni : nous nous répartissons le travail, nous nous coordonnons et nous nous formons au fur et à mesure. Ensemble, nous migrons de Dokku vers Kubernetes (VM Talos Linux sur un cluster Proxmox, provisionnées avec OpenTofu), et le staging comme la production fonctionneront ainsi. Nous documentons chaque étape pour toute l'équipe et consignons chaque choix d'architecture dans un architectural decision record (ADR).",
+    polycloud:
+      "Côté **Polycloud**, nous venons de lancer le call for papers avec une campagne d'e-mails, et je prépare les prochains posts sur nos réseaux.",
     updated: "Mis à jour · novembre 2026",
   },
   notFound: {
@@ -141,7 +156,7 @@ const fr: Dictionary = {
     back: "Retour à l'accueil",
   },
   contact: {
-    index: "06 — Contact",
+    index: "07 — Contact",
     titleStart: "Construisons quelque chose d'",
     titleHighlight: "utile",
     titleEnd: ".",
