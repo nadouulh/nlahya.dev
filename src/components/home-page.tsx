@@ -327,15 +327,14 @@ export function HomePage({ lang }: { lang: Locale }) {
                 <span className="absolute -left-9 top-7 flex size-7 items-center justify-center rounded-full border-2 border-lavender-veil-400 bg-surface-inner sm:-left-10">
                   <span className="size-2.5 rounded-full bg-atomic-tangerine-500" />
                 </span>
-                <header className="flex flex-wrap items-center gap-x-4 gap-y-3">
-                  <Logo src={item.logo} />
-                  <div className="flex min-w-0 flex-1 flex-col gap-1">
+                {/* Date under the title: own row on phones, under the text column from sm, never beside it */}
+                <header className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-3 gap-y-3 sm:gap-x-4 sm:gap-y-2">
+                  <Logo src={item.logo} className="size-11 sm:size-14" />
+                  <div className="flex min-w-0 flex-col gap-1">
                     <h3 className="font-display text-2xl font-bold leading-tight">{t.experience[item.id].role}</h3>
                     <p className="font-semibold text-link">{item.org}</p>
                   </div>
-                  <span className="rounded-full bg-chip px-3 py-1 text-[13px] font-medium text-chip-foreground">
-                    {t.experience[item.id].date}
-                  </span>
+                  <span className="col-span-2 w-fit whitespace-nowrap rounded-full bg-chip px-3 py-1 text-[13px] font-medium text-chip-foreground sm:col-span-1 sm:col-start-2">{t.experience[item.id].date}</span>
                 </header>
                 <p className="text-pretty text-[15px]">
                   <RichText text={t.experience[item.id].summary} linkClassName={inlineLink} />
@@ -395,15 +394,13 @@ export function HomePage({ lang }: { lang: Locale }) {
         <Card id="volunteering" className="flex flex-col gap-10">
           <SectionHeading index={t.volunteering.index} title={t.volunteering.title} className="items-center text-center" />
           <article className="flex flex-col gap-3 rounded-2xl border border-hairline bg-surface-inner p-5 sm:p-7">
-            <header className="flex flex-wrap items-center gap-x-4 gap-y-3">
-              <Logo src="/logos/polycloud.svg" />
-              <div className="flex min-w-0 flex-1 flex-col gap-1">
+            <header className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-3 gap-y-3 sm:gap-x-4 sm:gap-y-2">
+              <Logo src="/logos/polycloud.svg" className="size-11 sm:size-14" />
+              <div className="flex min-w-0 flex-col gap-1">
                 <h3 className="font-display text-2xl font-bold leading-tight">{t.volunteering.polycloud.role}</h3>
                 <p className="font-semibold text-link">{t.volunteering.polycloud.position}</p>
               </div>
-              <span className="rounded-full bg-chip px-3 py-1 text-[13px] font-medium text-chip-foreground">
-                {t.volunteering.polycloud.date}
-              </span>
+              <span className="col-span-2 w-fit whitespace-nowrap rounded-full bg-chip px-3 py-1 text-[13px] font-medium text-chip-foreground sm:col-span-1 sm:col-start-2">{t.volunteering.polycloud.date}</span>
             </header>
             <p className="text-pretty text-[15px]">{t.volunteering.polycloud.summary}</p>
             <ul className="flex flex-wrap gap-2">
