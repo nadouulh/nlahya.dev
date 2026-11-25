@@ -9,14 +9,14 @@
     "preview": "docker build -t portfolio:preview . && docker run --rm --read-only --tmpfs /tmp --cap-drop all -p 127.0.0.1:8080:3000 portfolio:preview"
   },
   "dependencies": {
-    "@astrojs/react": "7.1.1",
-    "@tailwindcss/vite": "4.3.3",
-    "astro": "7.4.2",
-    "cn": "^0.4.0",
-    "lucide-react": "^1.47.0",
-    "react": "19.2.8",
-    "react-dom": "19.2.8",
-    "three": "^0.186.1"
+    "@astrojs/react": "7.1.2",
+    "@tailwindcss/vite": "4.3.4",
+    "astro": "7.4.5",
+    "cn": "^0.5.2",
+    "lucide-react": "^1.67.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "three": "^0.187.0"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
@@ -27,14 +27,14 @@
     "@types/node": "^22.20.5",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@types/three": "^0.186.0",
+    "@types/three": "^0.187.0",
     "eslint": "^9",
     "eslint-plugin-astro": "3.2.1",
     "eslint-plugin-react-hooks": "7.1.1",
     "satori": "^0.63.2",
     "tailwindcss": "^4",
     "typescript": "^5",
-    "typescript-eslint": "8.72.0"
+    "typescript-eslint": "8.72.1"
   },
   "packageManager": "pnpm@10.30.3"
 }
